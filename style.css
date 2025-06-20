@@ -1,0 +1,262 @@
+/* General Body Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean sans-serif font */
+    margin: 0;
+    background-color: #f8f9fa; /* Light background */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center content vertically */
+    min-height: 100vh; /* Full viewport height */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in element's total width and height */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g opacity="0.1"><path d="M50 0L61.8 38.2L100 38.2L69.1 61.8L80.9 100L50 76.4L19.1 100L30.9 61.8L0 38.2L38.2 38.2Z" fill="%2328a745"/></g></svg>'); /* Subtle solar pattern */
+    background-size: 80px; /* Adjust size of pattern */
+}
+
+/* Main Container */
+.container {
+    background-color: #fff; /* White background for the main card */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    padding: 30px;
+    width: 100%;
+    max-width: 700px; /* Max width for readability */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative; /* Needed for any absolute positioning later */
+    overflow: hidden; /* Hide any overflow, especially for image generation */
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px; /* Space below header content */
+    border-bottom: 1px solid #eee; /* Subtle divider */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+header h1 {
+    color: #28a745; /* Energetic green for company name */
+    font-size: 2.2em;
+    margin: 0;
+    font-weight: 700; /* Bold */
+}
+
+header .motto {
+    color: #6c757d; /* Muted grey for motto */
+    font-size: 0.9em;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+header h2 {
+    color: #343a40; /* Darker text for heading */
+    font-size: 1.8em;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Date Selector */
+.date-selector {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align to the left */
+    margin-bottom: 20px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto; /* Center the date selector itself */
+}
+
+.date-selector label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #495057;
+}
+
+.date-selector input[type="date"] {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+/* Price List Section */
+.price-list-section {
+    margin-bottom: 25px;
+}
+
+#priceItems {
+    margin-bottom: 15px;
+    border: 1px solid #e9ecef; /* Light border around the list */
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.price-item {
+    display: flex; /* Use flexbox for item layout */
+    align-items: center;
+    justify-content: space-between; /* Space between label/input and button */
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0; /* Subtle divider between items */
+    gap: 10px; /* Space between elements */
+}
+
+.price-item:last-child {
+    border-bottom: none; /* No divider after the last item */
+}
+
+.price-item label {
+    font-weight: 500;
+    color: #343a40;
+    flex-grow: 1; /* Allow label to take available space */
+    white-space: nowrap; /* Prevent label from wrapping initially */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis if text is too long */
+}
+
+.price-item input[type="number"] {
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 100px; /* Fixed width for price input */
+    text-align: right; /* Align text to the right for prices */
+    flex-shrink: 0; /* Prevent input from shrinking */
+}
+
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: #dc3545; /* Red for delete icon */
+    cursor: pointer;
+    font-size: 1.1em;
+    padding: 5px;
+    transition: color 0.2s ease;
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.remove-item-btn:hover {
+    color: #c82333;
+}
+
+/* Controls (Insert/Clear Buttons) */
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    justify-content: center; /* Center the buttons */
+}
+
+.controls button {
+    background-color: #007bff; /* Blue for action buttons */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    display: flex; /* For icon and text alignment */
+    align-items: center;
+    gap: 5px;
+}
+
+.controls button:hover {
+    background-color: #0056b3;
+}
+
+/* Download Button */
+.download-btn {
+    background-color: #28a745; /* Green for download */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+    display: block; /* Make it a block element to take full width */
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    display: flex; /* For icon and text alignment */
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.download-btn:hover {
+    background-color: #1e7e34;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f8f9fa; /* Light background for footer */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: #555;
+    border-top: 1px solid #eee; /* Top border */
+    margin-top: 20px; /* Space from content above */
+}
+
+footer h3 {
+    color: #343a40;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+footer p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+    header h1 {
+        font-size: 1.8em;
+    }
+    header h2 {
+        font-size: 1.5em;
+    }
+    .price-item {
+        flex-direction: column; /* Stack items vertically on small screens */
+        align-items: flex-start;
+    }
+    .price-item label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .price-item input[type="number"] {
+        width: calc(100% - 10px); /* Adjust width */
+        text-align: left;
+    }
+    .remove-item-btn {
+        align-self: flex-end; /* Align trash icon to bottom right */
+    }
+    .controls {
+        flex-direction: column;
+    }
+    .controls button {
+        width: 100%;
+    }
+}
