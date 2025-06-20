@@ -1,11 +1,15 @@
-/* Define main colors */
+/* Define main colors for the SSS SOLAR inspired design */
 :root {
-    --light-blue-bg: #E0F2F7; /* New light blue background color from your latest image */
-    --solar-green: #28a745;
-    --dark-text: #333333; /* Darker text for readability on light backgrounds */
-    --white-text: #FFFFFF;
-    --input-bg: #FFFFFF;
-    --input-border: #000000;
+    --primary-blue: #2196F3; /* A slightly brighter blue for interactive elements */
+    --background-blue-tint: rgba(33, 150, 243, 0.5); /* Semi-transparent blue for photo overlay */
+    --text-dark: #343a40; /* Dark text for most elements */
+    --text-light: #FFFFFF; /* White text for contrast on dark backgrounds */
+    --table-header-bg: #F5F5F5; /* Light grey for table headers (if we used a table) */
+    --table-row-odd: #FFFFFF; /* White for odd rows */
+    --table-row-even: #F8F9FA; /* Very light grey for even rows */
+    --input-bg-color: #FFFFFF;
+    --input-border-color: #CED4DA; /* Subtle border for inputs */
+    --solar-green: #28a745; /* Green for interactive buttons */
 }
 
 /* General Body Styles */
@@ -19,7 +23,6 @@ body {
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
-    /* No solar background here for live view, it's for the image */
 }
 
 /* Main Container (Interactive View) */
@@ -29,38 +32,62 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 30px;
     width: 100%;
-    max-width: 700px;
+    max-width: 700px; /* Max width for consistency */
     display: flex;
     flex-direction: column;
     align-items: stretch;
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease; /* Smooth transition for visual changes */
+    transition: all 0.3s ease;
 }
 
 /* --- Image Output Specific Styles (.for-image-output class applied by JS) --- */
 .container.for-image-output {
-    padding: 0;
+    padding: 0; /* No padding on container itself, content elements have padding */
     border-radius: 0;
     box-shadow: none;
-    background-color: var(--light-blue-bg); /* Base light blue background */
-    color: var(--dark-text); /* Default text color for the poster */
+    background-color: transparent; /* Background handled by image and overlay */
+    color: var(--text-dark); /* Default text is dark on light content */
+    overflow: hidden; /* Ensure background image doesn't overflow */
 
-    /* Subtler Solar Panel Background Pattern */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="0" y="0" width="100" height="100" fill="%23E0F2F7"/><path d="M10 50 L50 10 L90 50 L50 90 Z" fill="none" stroke="%23B0D9E8" stroke-width="2" opacity="0.3"/><path d="M0 25 L25 0 L50 25 L25 50 Z" fill="none" stroke="%23B0D9E8" stroke-width="1" opacity="0.2"/><path d="M50 75 L75 50 L100 75 L75 100 Z" fill="none" stroke="%23B0D9E8" stroke-width="1" opacity="0.2"/></svg>');
-    background-size: 150px 150px; /* Adjust size of the repeating pattern */
-    background-position: center center;
-    background-repeat: repeat; /* Repeat the pattern */
+    /* Photographic Background from 'SSS SOLAR' image */
+    background-image: url('solar_background_photo.jpg'); /* YOU MUST PROVIDE THIS FILE */
+    background-size: cover; /* Cover the entire container */
+    background-position: center center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat */
+    position: relative; /* For the pseudo-element overlay */
 }
 
-/* Global padding for poster content */
+/* Blue Overlay for the Background Image */
+.container.for-image-output::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, var(--background-blue-tint) 0%, var(--background-blue-tint) 100%);
+    z-index: 0; /* Behind content */
+}
+
+/* Ensure all content is above the background overlay */
+.container.for-image-output > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Padding for internal sections in image output */
 .container.for-image-output header,
-.container.for-image-output .main-heading-row,
 .container.for-image-output .price-list-section,
-.container.for-image-output footer {
-    padding-left: 40px;
+.container.for-image-output .contact-info-box {
+    padding-left: 40px; /* Internal padding for sections */
     padding-right: 40px;
 }
+.container.for-image-output .price-item {
+    padding-left: 40px; /* Item specific padding */
+    padding-right: 40px;
+}
+
 
 /* Header for Image Output */
 .container.for-image-output header {
@@ -69,144 +96,182 @@ body {
     padding-bottom: 20px;
     border-bottom: none;
     margin-bottom: 0;
-    text-align: center; /* Centered as per your latest image */
+    text-align: center; /* Centered branding */
+    color: var(--text-light); /* White text for header */
 }
 
 .container.for-image-output .logo-container {
     justify-content: center; /* Center logo and company name */
 }
 
+/* Adjustments for the logo if it's not already circular in the image file */
+.container.for-image-output .logo {
+    border-radius: 50%; /* Make it circular */
+    border: 2px solid var(--text-light); /* White border around the circular logo */
+    padding: 5px; /* Space inside border */
+    background-color: rgba(255, 255, 255, 0.1); /* Slight white tint behind logo */
+    box-sizing: border-box;
+}
+
 .container.for-image-output header h1 {
-    color: var(--dark-text); /* Dark text for company name */
-    font-size: 2.5em;
+    color: var(--text-light); /* White company name */
+    font-size: 2.8em; /* Larger, prominent */
     font-weight: bold;
+    letter-spacing: 1.5px; /* Slight letter spacing */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Subtle shadow */
 }
 
 .container.for-image-output header .motto {
-    color: var(--dark-text); /* Dark motto text */
-    font-size: 1.1em;
-    margin-top: 8px;
-    margin-bottom: 0;
+    color: var(--text-light); /* White motto text */
+    font-size: 1.15em;
+    margin-top: 5px;
+    margin-bottom: 30px; /* More space below motto */
+    font-style: italic; /* As per example */
 }
 
-/* DAILY PRICE LIST and Date Selector Row for Image Output */
+/* DAILY PRICE LIST and Date Selector for Image Output */
 .container.for-image-output .main-heading-row {
-    display: flex; /* Kept flex for spacing */
-    justify-content: space-between; /* Pushes H2 left, Date right */
-    align-items: flex-end; /* Align items to the bottom */
-    margin-top: 20px;
+    display: flex;
+    justify-content: center; /* Center the whole row horizontally */
+    align-items: center; /* Vertically align */
     margin-bottom: 30px;
+    padding: 0 40px; /* Padding for the row itself */
+    box-sizing: border-box;
 }
 
 .container.for-image-output .main-heading-row h2 {
-    color: var(--dark-text); /* Dark DAILY PRICE LIST text */
-    font-size: 2.8em;
-    margin: 0;
+    color: var(--text-dark); /* Dark text for DAILY PRICE LIST */
+    font-size: 3.5em; /* Very large */
     font-weight: bold;
+    margin: 0;
     line-height: 1;
-    text-align: left; /* Explicitly left-align */
+    text-align: center; /* Centered in its own space */
     flex-grow: 1; /* Allows it to take space */
+    background-color: var(--table-row-odd); /* White background for the heading */
+    padding: 10px 20px;
+    border-radius: 8px; /* Slightly rounded corners */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
 }
 
 .container.for-image-output .date-selector {
-    background-color: var(--input-bg);
-    border: 2px solid var(--input-border);
-    padding: 10px 15px;
-    border-radius: 0;
-    width: 180px;
-    height: 40px;
+    background-color: var(--input-bg-color); /* White background for date box */
+    border: none; /* No border for the date box */
+    border-radius: 8px; /* Rounded corners for date box */
+    padding: 12px 18px; /* Larger padding */
+    width: 200px; /* Fixed width */
+    height: 45px; /* Fixed height */
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-shrink: 0;
     box-sizing: border-box;
+    margin-left: 20px; /* Space from DAILY PRICE LIST */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
 }
 
 .container.for-image-output .date-selector label {
     font-size: 1.1em;
-    color: var(--input-border);
-    font-weight: bold;
+    color: var(--text-dark); /* Dark label text */
+    font-weight: normal; /* Normal weight */
     margin-right: 10px;
 }
 .container.for-image-output .date-selector input[type="date"] {
     background: transparent;
     border: none;
     font-size: 1.1em;
-    font-weight: bold;
-    color: var(--input-border);
+    font-weight: bold; /* Date itself is bold */
+    color: var(--text-dark); /* Dark date text */
     padding: 0;
     width: auto;
 }
 .container.for-image-output .date-selector input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1);
+    filter: none; /* Keep default or light icon on dark background */
 }
 
 
-/* Price List Section for Image Output */
+/* Price List Section for Image Output (Table-like styling) */
 .container.for-image-output .price-list-section {
-    margin-bottom: 0;
+    margin-bottom: 30px; /* Space before contact box */
+    background-color: transparent; /* No background for section, items handle it */
+    border-radius: 8px; /* Rounded corners for the entire list area */
+    overflow: hidden; /* Clip contents at rounded corners */
 }
 
 .container.for-image-output #priceItems {
-    border: none;
+    border: none; /* No outer border */
     padding: 0;
     background-color: transparent;
     margin-bottom: 0;
+    border-top-left-radius: 8px; /* Rounded top corners */
+    border-top-right-radius: 8px;
 }
 
 .container.for-image-output .price-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 40px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2); /* Subtle black divider */
-    background: none;
-    color: var(--dark-text); /* Dark text for item names */
+    padding: 15px 25px; /* Item padding, slightly less horizontal */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08); /* Very subtle separator */
+    color: var(--text-dark); /* Dark text for item names */
+    background-color: var(--table-row-odd); /* Default to white */
+}
+
+/* Alternating Row Colors */
+.container.for-image-output .price-item:nth-child(even) {
+    background-color: var(--table-row-even); /* Light grey for even rows */
 }
 
 .container.for-image-output .price-item:last-child {
-    border-bottom: none;
+    border-bottom: none; /* No border after the last item */
 }
 
 .container.for-image-output .price-item label {
-    color: var(--dark-text); /* Item name is dark */
+    color: var(--text-dark); /* Item name is dark */
     font-size: 1.1em;
     font-weight: normal;
-    flex-grow: 1;
+    flex-grow: 1; /* Allows it to fill space */
     white-space: normal;
+    padding-right: 15px; /* Space before price input */
 }
 
 .container.for-image-output .price-item input[type="number"] {
-    background-color: var(--input-bg);
-    color: var(--input-border);
-    border: 2px solid var(--input-border);
-    width: 150px;
-    height: 40px;
-    font-weight: bold;
-    text-align: right; /* Prices right-aligned in box, as per latest image interpretation */
-    font-size: 1.2em;
+    background-color: var(--input-bg-color); /* White background for price box */
+    color: var(--text-dark); /* Dark text inside price box */
+    border: none; /* No border for price box */
+    border-radius: 4px; /* Slightly rounded corners */
+    width: 120px; /* Fixed width */
+    height: 38px; /* Fixed height */
+    font-weight: bold; /* Prices bold */
+    text-align: right; /* Prices right-aligned in box */
+    font-size: 1.1em;
     padding: 5px 10px;
     flex-shrink: 0;
     box-sizing: border-box;
-    border-radius: 0;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.1); /* Subtle inner shadow */
 }
 
 
-/* Footer Styles for Image Output */
-.container.for-image-output footer {
-    background: none;
-    color: var(--dark-text); /* Dark text for contact info */
-    padding: 30px 40px;
-    border-radius: 0;
-    margin-top: 20px;
-    text-align: left; /* Align contact info to left */
+/* Footer Contact Information Box for Image Output */
+.container.for-image-output .contact-info-box {
+    background-color: var(--input-bg-color); /* White background */
+    color: var(--text-dark); /* Dark text */
+    padding: 30px 40px; /* Generous padding */
+    border-top-left-radius: 0; /* No top border radius if price list has one */
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 8px; /* Rounded bottom corners */
+    border-bottom-right-radius: 8px;
+    margin-top: 0; /* Connected to price list section */
+    text-align: left;
     font-size: 1.05em;
     line-height: 1.6;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* More pronounced shadow */
 }
 
-.container.for-image-output footer h3 {
-    color: var(--dark-text); /* Ensure heading is dark */
+.container.for-image-output .contact-info-box h3 {
+    color: var(--text-dark);
     margin-bottom: 15px;
+    font-size: 1.4em;
+    font-weight: bold;
 }
 
 /* Hide interactive controls in the image output */
@@ -217,7 +282,7 @@ body {
 }
 
 
-/* --- Default Interactive View Styles (Existing, for when user is interacting with the app) --- */
+/* --- Default Interactive View Styles (When user is editing the app) --- */
 header {
     text-align: center;
     margin-bottom: 25px;
@@ -236,10 +301,15 @@ header {
     width: 50px;
     height: 50px;
     margin-right: 10px;
+    /* Default styling for interactive view logo */
+    border-radius: 0;
+    border: none;
+    padding: 0;
+    background: none;
 }
 
 header h1 {
-    color: var(--solar-green);
+    color: var(--primary-blue); /* Blue for interactive view */
     font-size: 2.2em;
     margin: 0;
     font-weight: 700;
@@ -253,32 +323,39 @@ header .motto {
 }
 
 /* main-heading-row for interactive view */
-/* Note: This is now just a container for h2 and date-selector */
 .main-heading-row {
+    display: flex; /* Kept flex for side-by-side */
+    justify-content: space-between;
+    align-items: center;
     margin-top: 15px;
     margin-bottom: 20px;
-    text-align: left; /* Default alignment */
+    padding: 0 10px;
 }
-
 
 header h2 {
     color: #343a40;
     font-size: 1.8em;
     margin: 0;
     font-weight: 600;
-    text-align: left; /* Ensure left alignment */
+    text-align: left;
+    background: none; /* No background in interactive view */
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
 }
 
 .date-selector {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-top: 10px; /* Space from h2 */
+    margin: 0;
     width: auto;
     height: auto;
     padding: 0;
     border: none;
     background: none;
+    box-shadow: none;
+    border-radius: 0;
 }
 
 .date-selector label {
@@ -295,6 +372,7 @@ header h2 {
     cursor: pointer;
     background: #fff;
     color: #333;
+    box-shadow: none; /* No shadow in interactive view */
 }
 .date-selector input[type="date"]::-webkit-calendar-picker-indicator {
     filter: none;
@@ -319,6 +397,7 @@ header h2 {
     padding: 12px 0;
     border-bottom: 1px solid #f0f0f0;
     gap: 10px;
+    background-color: transparent; /* No alternating background in interactive view */
 }
 
 .price-item:last-child {
@@ -344,6 +423,8 @@ header h2 {
     flex-shrink: 0;
     background-color: #fff;
     color: #333;
+    box-shadow: none;
+    border-radius: 4px; /* Normal rounded corners */
 }
 
 .remove-item-btn {
@@ -409,7 +490,8 @@ header h2 {
     background-color: #1e7e34;
 }
 
-footer {
+/* Footer (interactive view) - now using .contact-info-box class */
+.contact-info-box {
     background-color: #f8f9fa;
     padding: 20px;
     border-radius: 8px;
@@ -417,15 +499,16 @@ footer {
     color: #555;
     border-top: 1px solid #eee;
     margin-top: 20px;
+    box-shadow: none; /* No shadow for interactive view */
 }
 
-footer h3 {
+.contact-info-box h3 {
     color: #343a40;
     margin-top: 0;
     margin-bottom: 10px;
 }
 
-footer p {
+.contact-info-box p {
     margin-bottom: 8px;
     line-height: 1.5;
 }
@@ -435,6 +518,17 @@ footer p {
     .container {
         padding: 20px;
     }
+    .container.for-image-output header,
+    .container.for-image-output .price-list-section,
+    .container.for-image-output .contact-info-box {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .container.for-image-output .price-item {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
     header h1 {
         font-size: 1.8em;
     }
@@ -448,10 +542,12 @@ footer p {
     }
     .main-heading-row h2 {
         font-size: 2em;
+        padding: 8px 15px; /* Adjust padding for smaller screens */
     }
     .date-selector {
         width: 100%;
         justify-content: flex-start;
+        margin-left: 0; /* Remove left margin on small screens */
     }
     .price-item {
         flex-direction: column;
@@ -460,6 +556,7 @@ footer p {
     .price-item label {
         width: 100%;
         margin-bottom: 5px;
+        padding-right: 0;
     }
     .price-item input[type="number"] {
         width: calc(100% - 10px);
@@ -473,16 +570,5 @@ footer p {
     }
     .controls button {
         width: 100%;
-    }
-
-    /* Adjust image output padding on small screens if desired */
-    .container.for-image-output header,
-    .container.for-image-output .price-list-section,
-    .container.for-image-output footer {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    .container.for-image-output .price-item {
-        padding: 15px 20px;
     }
 }
