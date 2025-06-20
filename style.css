@@ -10,6 +10,7 @@
     --input-bg-color: #FFFFFF;
     --input-border-color: #CED4DA; /* Subtle border for inputs */
     --solar-green: #28a745; /* Green for interactive buttons */
+    --footer-blue-box-bg: #003366; /* A distinct darker blue for the footer box */
 }
 
 /* General Body Styles */
@@ -78,8 +79,7 @@ body {
 
 /* Padding for internal sections in image output */
 .container.for-image-output header,
-.container.for-image-output .price-list-section,
-.container.for-image-output .contact-info-box {
+.container.for-image-output .price-list-section {
     padding-left: 40px; /* Internal padding for sections */
     padding-right: 40px;
 }
@@ -191,10 +191,10 @@ body {
 
 /* Price List Section for Image Output (Table-like styling) */
 .container.for-image-output .price-list-section {
-    margin-bottom: 30px; /* Space before contact box */
+    margin-bottom: 0; /* No bottom margin, will be followed by footer box */
     background-color: transparent; /* No background for section, items handle it */
-    border-radius: 8px; /* Rounded corners for the entire list area */
-    overflow: hidden; /* Clip contents at rounded corners */
+    border-radius: 0; /* No rounding here, items are directly on background */
+    overflow: hidden; /* Ensure items don't overflow */
 }
 
 .container.for-image-output #priceItems {
@@ -202,31 +202,29 @@ body {
     padding: 0;
     background-color: transparent;
     margin-bottom: 0;
-    border-top-left-radius: 8px; /* Rounded top corners */
-    border-top-right-radius: 8px;
 }
 
 .container.for-image-output .price-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 25px; /* Item padding, slightly less horizontal */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08); /* Very subtle separator */
-    color: var(--text-dark); /* Dark text for item names */
-    background-color: var(--table-row-odd); /* Default to white */
+    padding: 15px 40px; /* Item padding */
+    border-bottom: none; /* No border for these items */
+    color: var(--text-light); /* White text for item names */
+    background-color: transparent; /* No background for items, they're on the main background */
 }
 
-/* Alternating Row Colors */
+/* No alternating row colors for this design */
 .container.for-image-output .price-item:nth-child(even) {
-    background-color: var(--table-row-even); /* Light grey for even rows */
+    background-color: transparent;
 }
 
 .container.for-image-output .price-item:last-child {
-    border-bottom: none; /* No border after the last item */
+    border-bottom: none;
 }
 
 .container.for-image-output .price-item label {
-    color: var(--text-dark); /* Item name is dark */
+    color: var(--text-light); /* Item name is white */
     font-size: 1.1em;
     font-weight: normal;
     flex-grow: 1; /* Allows it to fill space */
@@ -253,22 +251,19 @@ body {
 
 /* Footer Contact Information Box for Image Output */
 .container.for-image-output .contact-info-box {
-    background-color: var(--input-bg-color); /* White background */
-    color: var(--text-dark); /* Dark text */
+    background-color: var(--footer-blue-box-bg); /* The distinct blue background for the box */
+    color: var(--text-light); /* White text */
     padding: 30px 40px; /* Generous padding */
-    border-top-left-radius: 0; /* No top border radius if price list has one */
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 8px; /* Rounded bottom corners */
-    border-bottom-right-radius: 8px;
-    margin-top: 0; /* Connected to price list section */
+    border-radius: 0; /* No radius unless specified by image */
+    margin-top: 20px; /* Space above the box */
     text-align: left;
     font-size: 1.05em;
     line-height: 1.6;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* More pronounced shadow */
+    box-shadow: 0 -4px 8px rgba(0,0,0,0.2); /* Shadow on top to distinguish */
 }
 
 .container.for-image-output .contact-info-box h3 {
-    color: var(--text-dark);
+    color: var(--text-light); /* White heading */
     margin-bottom: 15px;
     font-size: 1.4em;
     font-weight: bold;
@@ -519,12 +514,15 @@ header h2 {
         padding: 20px;
     }
     .container.for-image-output header,
-    .container.for-image-output .price-list-section,
-    .container.for-image-output .contact-info-box {
+    .container.for-image-output .price-list-section {
         padding-left: 20px;
         padding-right: 20px;
     }
     .container.for-image-output .price-item {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .container.for-image-output .contact-info-box { /* Apply padding for mobile too */
         padding-left: 20px;
         padding-right: 20px;
     }
@@ -571,4 +569,4 @@ header h2 {
     .controls button {
         width: 100%;
     }
-}
+        }
