@@ -1,7 +1,8 @@
 /* Define main colors */
 :root {
-    --dark-blue: #002244;
+    --light-blue-bg: #E0F2F7; /* New light blue background color from your latest image */
     --solar-green: #28a745;
+    --dark-text: #333333; /* Darker text for readability on light backgrounds */
     --white-text: #FFFFFF;
     --input-bg: #FFFFFF;
     --input-border: #000000;
@@ -39,167 +40,173 @@ body {
 
 /* --- Image Output Specific Styles (.for-image-output class applied by JS) --- */
 .container.for-image-output {
-    padding: 0; /* Remove padding for the image to make content full width */
-    border-radius: 0; /* Remove rounded corners for a poster look */
-    box-shadow: none; /* Remove shadow for a flatter poster look */
-    background-color: var(--dark-blue); /* Solid dark blue background */
-    color: var(--white-text); /* Default text color for the poster */
-    /* Ensure no unwanted borders or shadows from interactive state */
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: var(--light-blue-bg); /* Base light blue background */
+    color: var(--dark-text); /* Default text color for the poster */
+
+    /* Subtler Solar Panel Background Pattern */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="0" y="0" width="100" height="100" fill="%23E0F2F7"/><path d="M10 50 L50 10 L90 50 L50 90 Z" fill="none" stroke="%23B0D9E8" stroke-width="2" opacity="0.3"/><path d="M0 25 L25 0 L50 25 L25 50 Z" fill="none" stroke="%23B0D9E8" stroke-width="1" opacity="0.2"/><path d="M50 75 L75 50 L100 75 L75 100 Z" fill="none" stroke="%23B0D9E8" stroke-width="1" opacity="0.2"/></svg>');
+    background-size: 150px 150px; /* Adjust size of the repeating pattern */
+    background-position: center center;
+    background-repeat: repeat; /* Repeat the pattern */
 }
 
 /* Global padding for poster content */
 .container.for-image-output header,
-.container.for-image-output .main-heading-row, /* New: to apply padding to this row */
+.container.for-image-output .main-heading-row,
 .container.for-image-output .price-list-section,
 .container.for-image-output footer {
-    padding-left: 40px; /* Add internal padding for poster content */
+    padding-left: 40px;
     padding-right: 40px;
 }
 
 /* Header for Image Output */
 .container.for-image-output header {
-    background: none; /* No separate background for header in poster */
-    padding-top: 50px; /* More top padding as per image */
+    background: none;
+    padding-top: 50px;
     padding-bottom: 20px;
     border-bottom: none;
     margin-bottom: 0;
-    text-align: left; /* Align logo/h1/motto to the left */
+    text-align: center; /* Centered as per your latest image */
 }
 
 .container.for-image-output .logo-container {
-    justify-content: flex-start; /* Align logo to the left */
+    justify-content: center; /* Center logo and company name */
 }
 
 .container.for-image-output header h1 {
-    color: var(--white-text); /* White company name */
-    font-size: 2.5em; /* Slightly larger as in image */
+    color: var(--dark-text); /* Dark text for company name */
+    font-size: 2.5em;
     font-weight: bold;
 }
 
 .container.for-image-output header .motto {
-    color: var(--white-text); /* White motto */
-    font-size: 1.1em; /* Slightly larger motto */
-    margin-top: 8px; /* More space below motto */
+    color: var(--dark-text); /* Dark motto text */
+    font-size: 1.1em;
+    margin-top: 8px;
     margin-bottom: 0;
 }
 
 /* DAILY PRICE LIST and Date Selector Row for Image Output */
 .container.for-image-output .main-heading-row {
-    display: flex;
+    display: flex; /* Kept flex for spacing */
     justify-content: space-between; /* Pushes H2 left, Date right */
-    align-items: center;
-    margin-top: 20px; /* Space from motto */
-    margin-bottom: 30px; /* Space before price list */
+    align-items: flex-end; /* Align items to the bottom */
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .container.for-image-output .main-heading-row h2 {
-    color: var(--white-text); /* White DAILY PRICE LIST text */
-    font-size: 2.8em; /* Large, prominent */
-    margin: 0; /* Remove default margins */
+    color: var(--dark-text); /* Dark DAILY PRICE LIST text */
+    font-size: 2.8em;
+    margin: 0;
     font-weight: bold;
-    line-height: 1; /* Tighter line height */
+    line-height: 1;
+    text-align: left; /* Explicitly left-align */
+    flex-grow: 1; /* Allows it to take space */
 }
 
 .container.for-image-output .date-selector {
-    background-color: var(--input-bg); /* White background for date box */
-    border: 2px solid var(--input-border); /* Black border for date box */
-    padding: 10px 15px; /* Adjust padding for larger box */
-    border-radius: 0; /* Square corners */
-    width: 180px; /* Fixed width for the date box */
-    height: 40px; /* Fixed height for the date box */
-    display: flex; /* For label and input alignment */
+    background-color: var(--input-bg);
+    border: 2px solid var(--input-border);
+    padding: 10px 15px;
+    border-radius: 0;
+    width: 180px;
+    height: 40px;
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-shrink: 0; /* Prevent it from shrinking */
-    box-sizing: border-box; /* Include padding and border in width/height */
+    flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 .container.for-image-output .date-selector label {
     font-size: 1.1em;
-    color: var(--input-border); /* Black label text inside white box */
+    color: var(--input-border);
     font-weight: bold;
-    margin-right: 10px; /* Space between label and input */
+    margin-right: 10px;
 }
 .container.for-image-output .date-selector input[type="date"] {
-    background: transparent; /* No background, use parent's */
-    border: none; /* No border */
+    background: transparent;
+    border: none;
     font-size: 1.1em;
     font-weight: bold;
-    color: var(--input-border); /* Black date text */
+    color: var(--input-border);
     padding: 0;
-    width: auto; /* Allow input to size naturally */
+    width: auto;
 }
-/* For Firefox to remove default date input icon (optional) */
 .container.for-image-output .date-selector input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1); /* Tries to make it black on white */
+    filter: invert(1);
 }
 
 
 /* Price List Section for Image Output */
 .container.for-image-output .price-list-section {
-    margin-bottom: 0; /* No margin here for seamless look */
+    margin-bottom: 0;
 }
 
 .container.for-image-output #priceItems {
-    border: none; /* Remove border around the whole items container */
+    border: none;
     padding: 0;
-    background-color: transparent; /* Ensure no background here to show rows */
-    margin-bottom: 0; /* No margin below items */
+    background-color: transparent;
+    margin-bottom: 0;
 }
 
 .container.for-image-output .price-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 40px; /* Consistent padding with header/footer */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Thin white divider */
-    background: none; /* No specific background for items, they inherit from container */
-    color: var(--white-text); /* White text for item names */
+    padding: 18px 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2); /* Subtle black divider */
+    background: none;
+    color: var(--dark-text); /* Dark text for item names */
 }
 
 .container.for-image-output .price-item:last-child {
-    border-bottom: none; /* No divider after the last item */
+    border-bottom: none;
 }
 
 .container.for-image-output .price-item label {
-    color: var(--white-text); /* Ensure item name is white */
-    font-size: 1.1em; /* Slightly larger font for readability */
-    font-weight: normal; /* As per image, not bold */
-    flex-grow: 1; /* Allow label to take available space */
-    white-space: normal; /* Allow label to wrap if needed */
+    color: var(--dark-text); /* Item name is dark */
+    font-size: 1.1em;
+    font-weight: normal;
+    flex-grow: 1;
+    white-space: normal;
 }
 
 .container.for-image-output .price-item input[type="number"] {
-    background-color: var(--input-bg); /* White background for price box */
-    color: var(--input-border); /* Black text inside price box */
-    border: 2px solid var(--input-border); /* Black border for price box */
-    width: 150px; /* Fixed width for price input as per image */
-    height: 40px; /* Fixed height for price input as per image */
-    font-weight: bold; /* Prices are bold as per image */
-    text-align: left; /* Prices are left-aligned in their boxes as per image */
-    font-size: 1.2em; /* Larger font size for prices */
-    padding: 5px 10px; /* Adjust padding inside box */
-    flex-shrink: 0; /* Prevent input from shrinking */
-    box-sizing: border-box; /* Include padding and border in width/height */
-    border-radius: 0; /* Square corners */
+    background-color: var(--input-bg);
+    color: var(--input-border);
+    border: 2px solid var(--input-border);
+    width: 150px;
+    height: 40px;
+    font-weight: bold;
+    text-align: right; /* Prices right-aligned in box, as per latest image interpretation */
+    font-size: 1.2em;
+    padding: 5px 10px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    border-radius: 0;
 }
 
 
-/* Footer Styles for Image Output (Integrated, no separate box) */
+/* Footer Styles for Image Output */
 .container.for-image-output footer {
-    background: none; /* No separate green box, just text on dark background */
-    color: var(--white-text); /* White text for contact info */
-    padding: 30px 40px; /* Adjust padding */
-    border-radius: 0; /* No rounded corners */
-    margin-top: 20px; /* Space from price list */
+    background: none;
+    color: var(--dark-text); /* Dark text for contact info */
+    padding: 30px 40px;
+    border-radius: 0;
+    margin-top: 20px;
     text-align: left; /* Align contact info to left */
-    font-size: 1.05em; /* Slightly larger font */
+    font-size: 1.05em;
     line-height: 1.6;
 }
 
 .container.for-image-output footer h3 {
-    color: var(--white-text); /* Ensure heading is white */
-    margin-bottom: 15px; /* More space below heading */
+    color: var(--dark-text); /* Ensure heading is dark */
+    margin-bottom: 15px;
 }
 
 /* Hide interactive controls in the image output */
@@ -246,27 +253,27 @@ header .motto {
 }
 
 /* main-heading-row for interactive view */
+/* Note: This is now just a container for h2 and date-selector */
 .main-heading-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-top: 15px;
     margin-bottom: 20px;
-    padding: 0 10px; /* Some padding for interactive view */
+    text-align: left; /* Default alignment */
 }
+
 
 header h2 {
     color: #343a40;
     font-size: 1.8em;
     margin: 0;
     font-weight: 600;
+    text-align: left; /* Ensure left alignment */
 }
 
 .date-selector {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin: 0; /* Reset margin from specific image styles */
+    margin-top: 10px; /* Space from h2 */
     width: auto;
     height: auto;
     padding: 0;
@@ -286,11 +293,11 @@ header h2 {
     border-radius: 4px;
     font-size: 1em;
     cursor: pointer;
-    background: #fff; /* Ensure white background for interactive view */
+    background: #fff;
     color: #333;
 }
 .date-selector input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: none; /* Restore default */
+    filter: none;
 }
 
 
@@ -335,8 +342,8 @@ header h2 {
     width: 100px;
     text-align: right;
     flex-shrink: 0;
-    background-color: #fff; /* Ensure white background for interactive input */
-    color: #333; /* Ensure black text for interactive input */
+    background-color: #fff;
+    color: #333;
 }
 
 .remove-item-btn {
