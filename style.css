@@ -1,39 +1,166 @@
 /* General Body Styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean sans-serif font */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    background-color: #f8f9fa; /* Light background */
+    background-color: #f8f9fa; /* Light background for interactive view */
     display: flex;
     justify-content: center;
-    align-items: center; /* Center content vertically */
-    min-height: 100vh; /* Full viewport height */
+    align-items: center;
+    min-height: 100vh;
     padding: 20px;
-    box-sizing: border-box; /* Include padding in element's total width and height */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g opacity="0.1"><path d="M50 0L61.8 38.2L100 38.2L69.1 61.8L80.9 100L50 76.4L19.1 100L30.9 61.8L0 38.2L38.2 38.2Z" fill="%2328a745"/></g></svg>'); /* Subtle solar pattern */
-    background-size: 80px; /* Adjust size of pattern */
+    box-sizing: border-box;
+    /* No solar background here for live view, it's for the image */
 }
 
 /* Main Container */
 .container {
-    background-color: #fff; /* White background for the main card */
-    border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 30px;
     width: 100%;
-    max-width: 700px; /* Max width for readability */
+    max-width: 700px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    position: relative; /* Needed for any absolute positioning later */
-    overflow: hidden; /* Hide any overflow, especially for image generation */
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease; /* Smooth transition for visual changes */
 }
 
-/* Header Styles */
+/* --- Image Output Specific Styles (Applied via .for-image-output class in JS) --- */
+.container.for-image-output {
+    padding: 0; /* Remove padding for the image to make content full width */
+    border-radius: 0; /* Remove rounded corners for a poster look */
+    box-shadow: none; /* Remove shadow for a flatter poster look */
+    background: linear-gradient(to bottom, #f0f0f0, #e0e0e0); /* Subtle light gradient base */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 1000"><defs><linearGradient id="solarGradient" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23FFD700"/><stop offset="100%" stop-color="%23FFA500"/></linearGradient><linearGradient id="panelGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="%234A4A4A"/><stop offset="100%" stop-color="%232C2C2C"/></linearGradient><filter id="dropshadow" height="130%"><feGaussianBlur in="SourceAlpha" stdDeviation="3"/><feOffset dx="2" dy="2" result="offsetblur"/><feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect x="0" y="0" width="100%" height="100%" fill="url(#solarGradient)"/><path d="M-100,200 L200,0 L500,200 L200,400 Z" fill="url(#panelGradient)" transform="rotate(-15 150 200)" filter="url(#dropshadow)" opacity="0.6"/><path d="M-50,450 L250,250 L550,450 L250,650 Z" fill="url(#panelGradient)" transform="rotate(-15 250 450)" filter="url(#dropshadow)" opacity="0.6"/><path d="M0,700 L300,500 L600,700 L300,900 Z" fill="url(#panelGradient)" transform="rotate(-15 300 700)" filter="url(#dropshadow)" opacity="0.6"/><path d="M400,0 L700,-200 L1000,0 L700,200 Z" fill="url(#panelGradient)" transform="rotate(-15 700 0)" filter="url(#dropshadow)" opacity="0.6"/><path d="M450,250 L750,50 L1050,250 L750,450 Z" fill="url(#panelGradient)" transform="rotate(-15 750 250)" filter="url(#dropshadow)" opacity="0.6"/></svg>');
+    background-size: cover; /* Cover the entire area */
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333; /* Ensure text is readable on this background */
+}
+
+.container.for-image-output header,
+.container.for-image-output .price-list-section,
+.container.for-image-output .download-btn,
+.container.for-image-output footer {
+    padding-left: 40px; /* Add internal padding for poster content */
+    padding-right: 40px;
+}
+
+.container.for-image-output header {
+    background-color: rgba(255, 255, 255, 0.85); /* Slightly translucent white header */
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.container.for-image-output header h1 {
+    color: #28a745;
+}
+
+.container.for-image-output header h2 {
+    color: #343a40;
+    margin-bottom: 10px;
+}
+
+.container.for-image-output .date-selector {
+    background-color: rgba(255, 255, 255, 0.9); /* White background for date */
+    padding: 8px 15px;
+    border-radius: 5px;
+    width: fit-content;
+    margin: 10px auto 0; /* Center it */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.container.for-image-output .date-selector label {
+    font-size: 1.1em;
+    color: #333;
+}
+.container.for-image-output .date-selector input[type="date"] {
+    background: transparent;
+    border: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+    padding: 0;
+}
+
+
+/* Hide interactive controls in the image output */
+.container.for-image-output .controls,
+.container.for-image-output .download-btn,
+.container.for-image-output .remove-item-btn {
+    display: none !important;
+}
+
+/* Specific styling for the table-like structure in image */
+.container.for-image-output #priceItems {
+    border: none; /* Remove border around the whole items container */
+    padding: 0;
+    background-color: transparent; /* Ensure no background here to show rows */
+    margin-top: 20px;
+}
+
+.container.for-image-output .price-item {
+    display: flex; /* Ensure flex behavior */
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px; /* Adjust padding for items for poster effect */
+    border-bottom: none; /* Remove individual item borders, rely on striped background */
+}
+
+/* Striped Colors for Price Items */
+.container.for-image-output .price-item:nth-child(odd) { /* First, third, fifth, etc. items */
+    background-color: #555; /* Dark gray background */
+    color: white; /* White text */
+}
+
+.container.for-image-output .price-item:nth-child(even) { /* Second, fourth, sixth, etc. items */
+    background-color: #fff; /* White background */
+    color: #333; /* Black text */
+}
+
+.container.for-image-output .price-item:nth-child(odd) input[type="number"] {
+    background-color: #555; /* Same background color as row */
+    color: white; /* White text */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+}
+
+.container.for-image-output .price-item:nth-child(even) input[type="number"] {
+    background-color: #fff; /* Same background color as row */
+    color: #333; /* Black text */
+    border: 1px solid #ccc; /* Subtle gray border */
+}
+
+.container.for-image-output .price-item input[type="number"] {
+    font-weight: bold; /* Make price text bold */
+    text-align: right; /* Ensure price is right-aligned */
+}
+
+/* Footer Styles for Image Output */
+.container.for-image-output footer {
+    background-color: #28a745; /* Green box for contact info */
+    color: white; /* White text for contact info */
+    padding: 25px 40px; /* Adjust padding */
+    border-radius: 0; /* Remove rounded corners */
+    margin-top: 0; /* No margin from price list */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Subtle text shadow for pop */
+}
+
+.container.for-image-output footer h3 {
+    color: white; /* Ensure heading is white */
+}
+
+
+/* --- Default Interactive View Styles (from previous version, adjust as needed) --- */
 header {
     text-align: center;
     margin-bottom: 25px;
-    padding-bottom: 15px; /* Space below header content */
-    border-bottom: 1px solid #eee; /* Subtle divider */
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
 }
 
 .logo-container {
@@ -50,36 +177,35 @@ header {
 }
 
 header h1 {
-    color: #28a745; /* Energetic green for company name */
+    color: #28a745;
     font-size: 2.2em;
     margin: 0;
-    font-weight: 700; /* Bold */
+    font-weight: 700;
 }
 
 header .motto {
-    color: #6c757d; /* Muted grey for motto */
+    color: #6c757d;
     font-size: 0.9em;
     margin-top: 5px;
     margin-bottom: 15px;
 }
 
 header h2 {
-    color: #343a40; /* Darker text for heading */
+    color: #343a40;
     font-size: 1.8em;
     margin-top: 15px;
     margin-bottom: 20px;
     font-weight: 600;
 }
 
-/* Date Selector */
 .date-selector {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Align to the left */
+    justify-content: flex-start;
     margin-bottom: 20px;
     width: fit-content;
     margin-left: auto;
-    margin-right: auto; /* Center the date selector itself */
+    margin-right: auto;
 }
 
 .date-selector label {
@@ -96,38 +222,37 @@ header h2 {
     cursor: pointer;
 }
 
-/* Price List Section */
 .price-list-section {
     margin-bottom: 25px;
 }
 
 #priceItems {
     margin-bottom: 15px;
-    border: 1px solid #e9ecef; /* Light border around the list */
+    border: 1px solid #e9ecef;
     border-radius: 8px;
     padding: 10px;
 }
 
 .price-item {
-    display: flex; /* Use flexbox for item layout */
+    display: flex;
     align-items: center;
-    justify-content: space-between; /* Space between label/input and button */
+    justify-content: space-between;
     padding: 12px 0;
-    border-bottom: 1px solid #f0f0f0; /* Subtle divider between items */
-    gap: 10px; /* Space between elements */
+    border-bottom: 1px solid #f0f0f0;
+    gap: 10px;
 }
 
 .price-item:last-child {
-    border-bottom: none; /* No divider after the last item */
+    border-bottom: none;
 }
 
 .price-item label {
     font-weight: 500;
     color: #343a40;
-    flex-grow: 1; /* Allow label to take available space */
-    white-space: nowrap; /* Prevent label from wrapping initially */
+    flex-grow: 1;
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ellipsis if text is too long */
+    text-overflow: ellipsis;
 }
 
 .price-item input[type="number"] {
@@ -135,36 +260,35 @@ header h2 {
     border: 1px solid #ced4da;
     border-radius: 4px;
     font-size: 1em;
-    width: 100px; /* Fixed width for price input */
-    text-align: right; /* Align text to the right for prices */
-    flex-shrink: 0; /* Prevent input from shrinking */
+    width: 100px;
+    text-align: right;
+    flex-shrink: 0;
 }
 
 .remove-item-btn {
     background: none;
     border: none;
-    color: #dc3545; /* Red for delete icon */
+    color: #dc3545;
     cursor: pointer;
     font-size: 1.1em;
     padding: 5px;
     transition: color 0.2s ease;
-    flex-shrink: 0; /* Prevent button from shrinking */
+    flex-shrink: 0;
 }
 
 .remove-item-btn:hover {
     color: #c82333;
 }
 
-/* Controls (Insert/Clear Buttons) */
 .controls {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
-    justify-content: center; /* Center the buttons */
+    justify-content: center;
 }
 
 .controls button {
-    background-color: #007bff; /* Blue for action buttons */
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 6px;
@@ -172,7 +296,7 @@ header h2 {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
-    display: flex; /* For icon and text alignment */
+    display: flex;
     align-items: center;
     gap: 5px;
 }
@@ -181,9 +305,8 @@ header h2 {
     background-color: #0056b3;
 }
 
-/* Download Button */
 .download-btn {
-    background-color: #28a745; /* Green for download */
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 6px;
@@ -191,11 +314,11 @@ header h2 {
     cursor: pointer;
     font-size: 1.1em;
     transition: background-color 0.3s ease;
-    display: block; /* Make it a block element to take full width */
+    display: block;
     width: 100%;
     margin-bottom: 20px;
     box-sizing: border-box;
-    display: flex; /* For icon and text alignment */
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
@@ -205,15 +328,14 @@ header h2 {
     background-color: #1e7e34;
 }
 
-/* Footer Styles */
 footer {
-    background-color: #f8f9fa; /* Light background for footer */
+    background-color: #f8f9fa;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
     color: #555;
-    border-top: 1px solid #eee; /* Top border */
-    margin-top: 20px; /* Space from content above */
+    border-top: 1px solid #eee;
+    margin-top: 20px;
 }
 
 footer h3 {
@@ -239,7 +361,7 @@ footer p {
         font-size: 1.5em;
     }
     .price-item {
-        flex-direction: column; /* Stack items vertically on small screens */
+        flex-direction: column;
         align-items: flex-start;
     }
     .price-item label {
@@ -247,16 +369,27 @@ footer p {
         margin-bottom: 5px;
     }
     .price-item input[type="number"] {
-        width: calc(100% - 10px); /* Adjust width */
+        width: calc(100% - 10px);
         text-align: left;
     }
     .remove-item-btn {
-        align-self: flex-end; /* Align trash icon to bottom right */
+        align-self: flex-end;
     }
     .controls {
         flex-direction: column;
     }
     .controls button {
         width: 100%;
+    }
+
+    /* Adjust image output padding on small screens if desired */
+    .container.for-image-output header,
+    .container.for-image-output .price-list-section,
+    .container.for-image-output footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .container.for-image-output .price-item {
+        padding: 15px 20px;
     }
 }
