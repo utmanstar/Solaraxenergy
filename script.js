@@ -117,8 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
             priceDateInput.value = lastSelectedDate;
         } else {
             // If no last selected date, use today's date and save it
-            priceDateInput.value = formattedToday;
-            localStorage.setItem('solaraxLastSelectedDate', formattedToday);
+            const today = new Date(); // Re-define today just in case, though formattedToday is usually fine
+            priceDateInput.value = today.toISOString().split('T')[0];
+            localStorage.setItem('solaraxLastSelectedDate', priceDateInput.value);
         }
 
         const selectedDate = priceDateInput.value;
@@ -208,7 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Initial content load on first visit ---
     // If there's no data for today or any last selected date, then load defaults
-    if (!localStorage.getItem(`solaraxPriceItems_${formattedToday}`) && !localStorage.getItem('solaraxLastSelectedDate')) {
-         loadDefaultItems();
-    }
+    // This part is handled by loadStateFromLocalStorage at the top.
+    // However, if the page is loaded fresh with no local storage data,
+    // loadStateFromLocalStorage will call loadDefaultItems().
+    // So, this explicit check here might be redundant but harmless.
 });
