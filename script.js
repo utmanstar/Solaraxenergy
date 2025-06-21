@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const dateInput = document.getElementById("date");
   const downloadBtn = document.getElementById("download");
   const clearAllBtn = document.getElementById("clearAll");
+  const posterDateText = document.getElementById("poster-date-text");
+
+  // Load items from localStorage
+  let items = JSON.parse(localStorage.getItem("priceListItems")) || [];
+  let selectedDate = localStorage.getItem("selectedDate") || "";
 
   function formatDate(dateStr) {
     const [year, month, day] = dateStr.split("-");
@@ -13,51 +18,38 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateDate() {
-    const dateText = document.getElementById("poster-date-text");
     const dateVal = dateInput.value;
     if (dateVal) {
-      dateText.textContent = formatDate(dateVal);
+      posterDateText.textContent = formatDate(dateVal);
       localStorage.setItem("selectedDate", dateVal);
     }
   }
 
-  function saveItemsToLocalStorage() {
-    const items = [];
-    document.querySelectorAll("#priceItems li").forEach(li => {
-      const spans = li.querySelectorAll("span");
-      if (spans.length >= 2) {
-        items.push({
-          name: spans[0].textContent,
-          price: spans[1].textContent
-        });
-      }
+  function renderItems() {
+    priceItemsList.innerHTML = "";
+    items.forEach((item, index) => {
+      const li = document.createElement("li");
+
+      const nameSpan = document.createElement("span");
+      nameSpan.textContent = item.name;
+
+      const priceSpan = document.createElement("span");
+      priceSpan.textContent = item.price;
+
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "✕";
+      removeBtn.classList.add("remove-btn");
+      removeBtn.addEventListener("click", () => {
+        items.splice(index, 1);
+        localStorage.setItem("priceListItems", JSON.stringify(items));
+        renderItems();
+      });
+
+      li.appendChild(nameSpan);
+      li.appendChild(priceSpan);
+      li.appendChild(removeBtn);
+      priceItemsList.appendChild(li);
     });
-    localStorage.setItem("priceListItems", JSON.stringify(items));
-  }
-
-  function loadItemsFromLocalStorage() {
-    const items = JSON.parse(localStorage.getItem("priceListItems") || "[]");
-    items.forEach(item => addItem(item.name, item.price));
-  }
-
-  function addItem(name, price) {
-    const li = document.createElement("li");
-    const nameSpan = document.createElement("span");
-    nameSpan.textContent = name;
-    const priceSpan = document.createElement("span");
-    priceSpan.textContent = price;
-    const removeBtn = document.createElement("button");
-    removeBtn.textContent = "✕";
-    removeBtn.classList.add("remove-btn");
-    removeBtn.addEventListener("click", () => {
-      li.remove();
-      saveItemsToLocalStorage();
-    });
-
-    li.appendChild(nameSpan);
-    li.appendChild(priceSpan);
-    li.appendChild(removeBtn);
-    priceItemsList.appendChild(li);
   }
 
   addItemBtn.addEventListener("click", () => {
@@ -66,8 +58,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!itemName || !itemPrice) return;
 
-    addItem(itemName, itemPrice);
-    saveItemsToLocalStorage();
+    const newItem = { name: itemName, price: itemPrice };
+    items.push(newItem);
+    localStorage.setItem("priceListItems", JSON.stringify(items));
+    renderItems();
 
     itemNameInput.value = "";
     itemPriceInput.value = "";
@@ -75,8 +69,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   clearAllBtn.addEventListener("click", () => {
     if (confirm("Clear all items?")) {
-      priceItemsList.innerHTML = "";
+      items = [];
       localStorage.removeItem("priceListItems");
+      renderItems();
     }
   });
 
@@ -84,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   downloadBtn.addEventListener("click", () => {
     const poster = document.getElementById("poster");
-
     const removeBtns = document.querySelectorAll(".remove-btn");
     removeBtns.forEach(btn => btn.style.display = "none");
 
@@ -95,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
       scale: 2
     }).then(canvas => {
       const link = document.createElement("a");
-      link.download = `Solarax_Price_List_${new Date().toLocaleDateString()}.png`;
+      link.download = `Solarax_Price_List_${posterDateText.textContent}.png`;
       link.href = canvas.toDataURL();
       link.click();
 
@@ -103,13 +97,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Initial load
-  loadItemsFromLocalStorage();
-
-  // Restore selected date if available
-  const savedDate = localStorage.getItem("selectedDate");
-  if (savedDate) {
-    dateInput.value = savedDate;
-    updateDate();
+  // Load saved date and items
+  if (selectedDate) {
+    dateInput.value = selectedDate;
+    posterDateText.textContent = formatDate(selectedDate);
   }
+  renderItems();
 });
