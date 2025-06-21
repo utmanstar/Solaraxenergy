@@ -1,155 +1,50 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #0f2027;
-  margin: 0;
-  padding: 20px;
-  text-align: center;
-}
+/* styles.css */
 
-#poster {
-  width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background:
-    linear-gradient(rgba(15, 32, 55, 0.85), rgba(15, 32, 55, 0.85)),
-    url('solar-bg.jpg') no-repeat center center / cover;
-  color: white;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  position: relative;
-}
+body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0e1a25; color: #fff; display: flex; flex-direction: column; align-items: center; padding: 20px; }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 10px;
-}
+main { width: 100%; max-width: 1000px; }
 
-#logo {
-  height: 60px;
-}
+#input-section { background: #122c3d; padding: 20px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.4); }
 
-.title {
-  font-size: 2em;
-  font-weight: bold;
-}
+h1 { margin-bottom: 20px; text-align: center; }
 
-.date-section {
-  margin-top: 10px;
-  font-size: 1.1em;
-}
+.form-group { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 15px; }
 
-.date-section input {
-  font-size: 1em;
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: none;
-  width: 180px;
-}
+input[type="text"] { padding: 10px; border: none; border-radius: 5px; min-width: 200px; font-size: 1em; }
 
-.price-heading {
-  background: #00a86b;
-  color: white;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1.5em;
-  margin-top: 20px;
-}
+button { padding: 10px 20px; border: none; border-radius: 5px; background: #00a86b; color: #fff; font-weight: bold; cursor: pointer; transition: background 0.3s ease; }
 
-#priceItems {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-  font-size: 1.3em;
-  text-align: left;
-  font-weight: 600;
-}
+button:hover { background: #007c50; }
 
-#priceItems li {
-  margin-bottom: 12px;
-  background-color: rgba(255, 255, 255, 0.15);
-  color: #d4ffd4;
-  font-size: 1.4em;
-  font-weight: 700;
-  padding: 12px 18px;
-  border-radius: 8px;
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
+#poster { background: linear-gradient(rgba(12, 18, 28, 0.85), rgba(12, 18, 28, 0.85)), url('solar-bg.jpg') center center / cover; padding: 30px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.5); color: white; }
 
-#priceItems li span {
-  display: inline-block;
-  width: 100%;
-}
+.poster-header { display: flex; align-items: center; gap: 20px; }
 
-#priceItems li span:nth-child(2) {
-  text-align: right;
-  min-width: 80px;
-}
+#logo { height: 60px; }
 
-.remove-btn {
-  background: #ff5e5e;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  font-weight: bold;
-  cursor: pointer;
-  justify-self: end;
-}
+.poster-title h2 { font-size: 2em; margin: 0; }
 
-.contact-box {
-  margin-top: 30px;
-}
+.poster-title p { margin: 0; font-size: 1em; font-style: italic; color: #a6f0c6; }
 
-.address-box {
-  background: #00a86b;
-  color: white;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1em;
-}
+.date-box { margin-top: 15px; font-size: 1.1em; }
 
-.contact-details {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 15px;
-  margin-top: 10px;
-  border-radius: 6px;
-  font-size: 1.05em;
-  font-weight: bold;
-  color: #d4ffd4;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
+.date-box input { margin-left: 10px; padding: 6px 12px; border-radius: 5px; border: none; }
 
-#controls {
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
+.price-list-heading { margin-top: 20px; background: #00a86b; padding: 10px; border-radius: 5px; font-size: 1.5em; font-weight: bold; text-align: center; color: white; }
 
-#controls input, #controls button {
-  padding: 10px;
-  font-size: 1em;
-  border-radius: 5px;
-  border: none;
-}
+#priceItems { list-style: none; padding: 0; margin-top: 20px; }
 
-#controls button {
-  background-color: #00a86b;
-  color: white;
-  cursor: pointer;
-}
+#priceItems li { background: rgba(255,255,255,0.1); margin-bottom: 10px; padding: 12px 18px; border-radius: 6px; display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; font-size: 1.2em; color: #d4ffd4; }
 
-#controls button:hover {
-  background-color: #007e55;
-}
+#priceItems li span:nth-child(2) { text-align: right; min-width: 80px; }
+
+.remove-btn { background: #ff4c4c; color: white; border: none; border-radius: 50%; width: 25px; height: 25px; font-weight: bold; cursor: pointer; }
+
+.poster-footer { margin-top: 30px; font-size: 0.95em; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px; }
+
+.address { background: #00a86b; padding: 8px; border-radius: 5px; color: white; font-weight: bold; margin-bottom: 10px; }
+
+.contact { color: #a6f0c6; }
+
+.actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+
