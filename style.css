@@ -98,27 +98,31 @@ button:hover {
 
 .date-box {
   margin-top: 20px;
+  font-size: 1.3em;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #1db954;
+  gap: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.date-value-box {
+  background: #003366; /* dark blue */
+  color: white;
   padding: 10px 20px;
   border-radius: 8px;
-  color: #ffffff;
-  font-size: 1.5em;
-  font-weight: bold;
-  text-align: center;
-  max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
+  min-width: 150px;
+  font-size: 1.3em;
 }
 
 .price-list-heading {
-  margin-top: 25px;
-  background: #1db954;
-  padding: 16px;
-  border-radius: 8px;
-  font-size: 3.0em;
+  margin-top: 20px;
+  background: #00a86b; /* same as address box */
+  padding: 18px;
+  border-radius: 6px;
+  font-size: 2.2em;
   font-weight: bold;
   text-align: center;
   color: white;
