@@ -1,163 +1,21 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Solarax Energy - Daily Price List</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0f2027;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-    }#poster {
-  width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), linear-gradient(to right, #0f2027, #203a43, #2c5364);
-  color: white;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  position: relative;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 10px;
-}
-
-#logo {
-  height: 60px;
-}
-
-.title {
-  font-size: 2em;
-  font-weight: bold;
-}
-
-.date-section {
-  margin-top: 10px;
-  font-size: 1.1em;
-}
-
-.date-section input {
-  font-size: 1em;
-  padding: 5px;
-  border-radius: 5px;
-  border: none;
-}
-
-h2, h3 {
-  margin: 5px 0;
-}
-
-.price-heading {
-  background: #00a86b;
-  color: white;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1.5em;
-  margin-top: 20px;
-}
-
-#priceItems {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-  font-size: 1.3em;
-  text-align: left;
-  font-weight: 600;
-}
-
-#priceItems li {
-  margin-bottom: 12px;
-  background-color: rgba(255, 255, 255, 0.15);
-  color: #d4ffd4;
-  font-size: 1.4em;
-  font-weight: 700;
-  padding: 12px 18px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
-.remove-btn {
-  background: #ff5e5e;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.contact-box {
-  margin-top: 30px;
-}
-
-.address-box {
-  background: #00a86b;
-  color: white;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1em;
-}
-
-.contact-details {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 15px;
-  margin-top: 10px;
-  border-radius: 6px;
-  font-size: 1.05em;
-  font-weight: bold;
-  color: #d4ffd4;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
-#controls {
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-#controls input, #controls button {
-  padding: 10px;
-  font-size: 1em;
-  border-radius: 5px;
-  border: none;
-}
-
-#controls button {
-  background-color: #00a86b;
-  color: white;
-  cursor: pointer;
-}
-
-#controls button:hover {
-  background-color: #007e55;
-}
-
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
   <div id="poster">
     <div class="header">
-      <img src="logo.png" id="logo" alt="Solarax Energy Logo" />
+      <img id="logo" src="logo.png" alt="Solarax Energy Logo">
       <div class="title">Solarax Energy</div>
-    </div>
-    <h3>Harnessing the Infinite</h3><div class="date-section">
+    </div><div class="motto">Harnessing the Infinite</div>
+
+<div class="date-section">
   <label for="dateInput">Date:</label>
-  <input type="date" id="dateInput" />
+  <input type="text" id="dateInput" placeholder="DD-MM-YYYY">
 </div>
 
 <div class="price-heading">DAILY PRICE LIST</div>
@@ -169,75 +27,17 @@ h2, h3 {
     Address: Anora Morr, Sector No. 4, Khalabat Township, Haripur
   </div>
   <div class="contact-details">
-    <strong>Email:</strong> Solaraxenergy@gmail.com<br/>
-    <strong>Contact No:</strong> 0313-8996042 , 0342-8996775
+    Email: Solaraxenergy@gmail.com <br>
+    Contact No: 0313-8996042, 0342-8996775
   </div>
 </div>
 
   </div>  <div id="controls">
-    <input type="text" id="itemInput" placeholder="Item Name" />
-    <input type="text" id="priceInput" placeholder="Price" />
+    <input type="text" id="itemInput" placeholder="Item Name">
+    <input type="text" id="priceInput" placeholder="Price">
     <button onclick="addItem()">Insert</button>
-    <button onclick="removeLast()">Remove</button>
+    <button onclick="removeLast()">Remove Last</button>
     <button onclick="clearAll()">Remove All</button>
     <button onclick="downloadImage()">Download</button>
-  </div>  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>  <script>
-    const priceItems = document.getElementById("priceItems");
-    const itemInput = document.getElementById("itemInput");
-    const priceInput = document.getElementById("priceInput");
-    const dateInput = document.getElementById("dateInput");
-
-    let items = JSON.parse(localStorage.getItem("solarax_items")) || [];
-
-    function updateList() {
-      priceItems.innerHTML = "";
-      items.forEach(({ item, price }, index) => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-          <span>${item}</span>
-          <span>${price}</span>
-          <button class="remove-btn" onclick="removeItem(${index})">×</button>
-        `;
-        priceItems.appendChild(li);
-      });
-      localStorage.setItem("solarax_items", JSON.stringify(items));
-    }
-
-    function addItem() {
-      const item = itemInput.value.trim();
-      const price = priceInput.value.trim();
-      if (item && price) {
-        items.push({ item, price });
-        updateList();
-        itemInput.value = "";
-        priceInput.value = "";
-      }
-    }
-
-    function removeItem(index) {
-      items.splice(index, 1);
-      updateList();
-    }
-
-    function removeLast() {
-      items.pop();
-      updateList();
-    }
-
-    function clearAll() {
-      items = [];
-      updateList();
-    }
-
-    function downloadImage() {
-      html2canvas(document.getElementById("poster")).then(canvas => {
-        const link = document.createElement("a");
-        link.download = `Solarax_Price_List_${dateInput.value}.png`;
-        link.href = canvas.toDataURL();
-        link.click();
-      });
-    }
-
-    window.onload = updateList;
-  </script></body>
+  </div>  <script src="script.js"></script></body>
 </html>
