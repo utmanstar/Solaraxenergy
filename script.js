@@ -6,17 +6,41 @@ document.addEventListener("DOMContentLoaded", function () {
   const dateInput = document.getElementById("date");
   const downloadBtn = document.getElementById("download");
   const clearAllBtn = document.getElementById("clearAll");
+  const dateText = document.getElementById("poster-date-text");
 
+  // Format: yyyy-mm-dd to dd-mm-yyyy
   function formatDate(dateStr) {
+    if (!dateStr) return "dd-mm-yyyy";
     const [year, month, day] = dateStr.split("-");
     return `${day}-${month}-${year}`;
   }
 
   function updateDate() {
-    const dateText = document.getElementById("poster-date-text");
-    const dateVal = dateInput.value;
-    if (dateVal) {
-      dateText.textContent = formatDate(dateVal);
+    const val = dateInput.value;
+    dateText.textContent = formatDate(val);
+    localStorage.setItem("solarax-date", val);
+  }
+
+  function saveItems() {
+    const items = [];
+    document.querySelectorAll("#priceItems li").forEach(li => {
+      const name = li.querySelector("span:nth-child(1)").textContent;
+      const price = li.querySelector("span:nth-child(2)").textContent;
+      items.push({ name, price });
+    });
+    localStorage.setItem("solarax-items", JSON.stringify(items));
+  }
+
+  function loadItems() {
+    const items = JSON.parse(localStorage.getItem("solarax-items") || "[]");
+    items.forEach(({ name, price }) => addItem(name, price));
+  }
+
+  function loadDate() {
+    const savedDate = localStorage.getItem("solarax-date");
+    if (savedDate) {
+      dateInput.value = savedDate;
+      updateDate();
     }
   }
 
@@ -24,12 +48,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const li = document.createElement("li");
     const nameSpan = document.createElement("span");
     nameSpan.textContent = name;
+
     const priceSpan = document.createElement("span");
     priceSpan.textContent = price;
+
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "✕";
     removeBtn.classList.add("remove-btn");
-    removeBtn.addEventListener("click", () => li.remove());
+    removeBtn.addEventListener("click", () => {
+      li.remove();
+      saveItems();
+    });
 
     li.appendChild(nameSpan);
     li.appendChild(priceSpan);
@@ -44,14 +73,15 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!itemName || !itemPrice) return;
 
     addItem(itemName, itemPrice);
-
     itemNameInput.value = "";
     itemPriceInput.value = "";
+    saveItems();
   });
 
   clearAllBtn.addEventListener("click", () => {
     if (confirm("Clear all items?")) {
       priceItemsList.innerHTML = "";
+      localStorage.removeItem("solarax-items");
     }
   });
 
@@ -60,21 +90,23 @@ document.addEventListener("DOMContentLoaded", function () {
   downloadBtn.addEventListener("click", () => {
     const poster = document.getElementById("poster");
 
-    const removeBtns = document.querySelectorAll(".remove-btn");
+    // Hide remove buttons
+    const removeBtns = poster.querySelectorAll(".remove-btn");
     removeBtns.forEach(btn => btn.style.display = "none");
 
     updateDate();
 
-    html2canvas(poster, {
-      useCORS: true,
-      scale: 2
-    }).then(canvas => {
+    html2canvas(poster, { useCORS: true, scale: 2 }).then(canvas => {
       const link = document.createElement("a");
-      link.download = `Solarax_Price_List_${new Date().toLocaleDateString()}.png`;
+      link.download = `Solarax_Price_List_${dateText.textContent}.png`;
       link.href = canvas.toDataURL();
       link.click();
 
-      removeBtns.forEach(btn => btn.style.display = "block");
+      removeBtns.forEach(btn => (btn.style.display = "inline-block"));
     });
   });
+
+  // Load saved data on startup
+  loadItems();
+  loadDate();
 });
