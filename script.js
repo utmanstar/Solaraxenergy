@@ -1,52 +1,70 @@
-document.addEventListener("DOMContentLoaded", function () { const addItemBtn = document.getElementById("addItem"); const itemNameInput = document.getElementById("itemName"); const itemPriceInput = document.getElementById("itemPrice"); const priceItemsList = document.getElementById("priceItems"); const dateInput = document.getElementById("date"); const dateText = document.getElementById("poster-date-text"); const downloadBtn = document.getElementById("download"); const clearAllBtn = document.getElementById("clearAll");
+// script.js
 
-// Format date to dd-mm-yyyy function formatDate(dateStr) { if (!dateStr) return "--/--/----"; const [year, month, day] = dateStr.split("-"); return ${day}-${month}-${year}; }
+document.addEventListener("DOMContentLoaded", function () {
+  const addItemBtn = document.getElementById("addItem");
+  const itemNameInput = document.getElementById("itemName");
+  const itemPriceInput = document.getElementById("itemPrice");
+  const priceItemsList = document.getElementById("priceItems");
+  const dateInput = document.getElementById("date");
+  const downloadBtn = document.getElementById("download");
+  const clearAllBtn = document.getElementById("clearAll");
 
-function updateDate() { const formatted = formatDate(dateInput.value); dateText.textContent = formatted; localStorage.setItem("posterDate", dateInput.value); }
+  function formatDate(dateStr) {
+    const [year, month, day] = dateStr.split("-");
+    return `${day}-${month}-${year}`;
+  }
 
-function createListItem(name, price) { const li = document.createElement("li");
+  function updateDate() {
+    const dateText = document.getElementById("poster-date-text");
+    const dateVal = dateInput.value;
+    if (dateVal) {
+      dateText.textContent = formatDate(dateVal);
+    }
+  }
 
-const nameSpan = document.createElement("span");
-nameSpan.textContent = name;
+  dateInput.addEventListener("change", updateDate);
 
-const priceSpan = document.createElement("span");
-priceSpan.textContent = price;
+  addItemBtn.addEventListener("click", () => {
+    const itemName = itemNameInput.value.trim();
+    const itemPrice = itemPriceInput.value.trim();
 
-const removeBtn = document.createElement("button");
-removeBtn.textContent = "✕";
-removeBtn.classList.add("remove-btn");
-removeBtn.addEventListener("click", () => {
-  li.remove();
-  saveItems();
+    if (!itemName || !itemPrice) return;
+
+    const li = document.createElement("li");
+    const nameSpan = document.createElement("span");
+    nameSpan.textContent = itemName;
+    const priceSpan = document.createElement("span");
+    priceSpan.textContent = itemPrice;
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "✕";
+    removeBtn.classList.add("remove-btn");
+    removeBtn.addEventListener("click", () => li.remove());
+
+    li.appendChild(nameSpan);
+    li.appendChild(priceSpan);
+    li.appendChild(removeBtn);
+    priceItemsList.appendChild(li);
+
+    itemNameInput.value = "";
+    itemPriceInput.value = "";
+  });
+
+  clearAllBtn.addEventListener("click", () => {
+    priceItemsList.innerHTML = "";
+  });
+
+  downloadBtn.addEventListener("click", () => {
+    const poster = document.getElementById("poster");
+    updateDate(); // Ensure correct date format
+
+    html2canvas(poster, {
+      useCORS: true,
+      scale: 2
+    }).then((canvas) => {
+      const link = document.createElement("a");
+      link.download = `Solarax_Price_List_${new Date().toLocaleDateString()}.png`;
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  });
 });
-
-li.appendChild(nameSpan);
-li.appendChild(priceSpan);
-li.appendChild(removeBtn);
-
-priceItemsList.appendChild(li);
-
-}
-
-function saveItems() { const items = []; document.querySelectorAll("#priceItems li").forEach(li => { const [name, price] = li.querySelectorAll("span"); items.push({ name: name.textContent, price: price.textContent }); }); localStorage.setItem("priceItems", JSON.stringify(items)); }
-
-function loadItems() { const savedItems = JSON.parse(localStorage.getItem("priceItems") || "[]"); savedItems.forEach(item => createListItem(item.name, item.price));
-
-const savedDate = localStorage.getItem("posterDate");
-if (savedDate) {
-  dateInput.value = savedDate;
-  updateDate();
-}
-
-}
-
-addItemBtn.addEventListener("click", () => { const name = itemNameInput.value.trim(); const price = itemPriceInput.value.trim(); if (!name || !price) return; createListItem(name, price); itemNameInput.value = ""; itemPriceInput.value = ""; saveItems(); });
-
-clearAllBtn.addEventListener("click", () => { priceItemsList.innerHTML = ""; localStorage.removeItem("priceItems"); });
-
-dateInput.addEventListener("change", updateDate);
-
-downloadBtn.addEventListener("click", () => { updateDate(); html2canvas(document.getElementById("poster"), { useCORS: true, scale: 2 }).then(canvas => { const link = document.createElement("a"); const date = formatDate(dateInput.value); link.download = Solarax_Price_List_${date}.png; link.href = canvas.toDataURL("image/png"); link.click(); }); });
-
-loadItems(); });
-
