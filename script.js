@@ -1,50 +1,82 @@
-/* style.css */
+document.addEventListener('DOMContentLoaded', function () {
+  const itemInput = document.getElementById('itemInput');
+  const priceInput = document.getElementById('priceInput');
+  const priceItems = document.getElementById('priceItems');
+  const dateInput = document.getElementById('dateInput');
 
-body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0e1a25; color: #fff; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+  // Set today's date by default
+  const today = new Date();
+  dateInput.value = today.toISOString().split('T')[0];
 
-main { width: 100%; max-width: 1000px; }
+  let items = JSON.parse(localStorage.getItem('solarax_items')) || [];
 
-#input-section { background: #122c3d; padding: 20px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+  function updateList() {
+    priceItems.innerHTML = '';
+    items.forEach(({ item, price }, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span>${item}</span>
+        <span>${price}</span>
+        <button class="remove-btn" data-index="${index}">&times;</button>
+      `;
+      priceItems.appendChild(li);
+    });
+    localStorage.setItem('solarax_items', JSON.stringify(items));
+  }
 
-h1 { margin-bottom: 20px; text-align: center; }
+  function addItem() {
+    const item = itemInput.value.trim();
+    const price = priceInput.value.trim();
+    if (item && price) {
+      items.push({ item, price });
+      updateList();
+      itemInput.value = '';
+      priceInput.value = '';
+    }
+  }
 
-.form-group { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 15px; }
+  function removeItem(index) {
+    items.splice(index, 1);
+    updateList();
+  }
 
-input[type="text"], input[type="date"] { padding: 10px; border: none; border-radius: 5px; min-width: 200px; font-size: 1em; }
+  function removeLast() {
+    items.pop();
+    updateList();
+  }
 
-button { padding: 10px 20px; border: none; border-radius: 5px; background: #00a86b; color: #fff; font-weight: bold; cursor: pointer; transition: background 0.3s ease; }
+  function clearAll() {
+    items = [];
+    updateList();
+  }
 
-button:hover { background: #007c50; }
+  function downloadImage() {
+    document.querySelectorAll(".remove-btn").forEach(btn => btn.style.display = 'none');
 
-#poster { background: linear-gradient(rgba(14, 26, 37, 0.95), rgba(14, 26, 37, 0.95)), url('solar-bg.jpg') center center / cover; padding: 30px; border-radius: 12px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); color: white; }
+    html2canvas(document.getElementById('poster')).then(canvas => {
+      const link = document.createElement('a');
+      const date = dateInput.value || new Date().toLocaleDateString();
+      link.download = `Solarax_Price_List_${date}.png`;
+      link.href = canvas.toDataURL();
+      link.click();
 
-.poster-header { display: flex; align-items: center; gap: 20px; justify-content: center; }
+      document.querySelectorAll(".remove-btn").forEach(btn => btn.style.display = 'inline-block');
+    });
+  }
 
-#logo { height: 60px; }
+  // Attach functions to window for HTML access
+  window.addItem = addItem;
+  window.removeLast = removeLast;
+  window.clearAll = clearAll;
+  window.downloadImage = downloadImage;
 
-.poster-title h2 { font-size: 2.2em; margin: 0; font-weight: bold; text-transform: uppercase; }
+  // Handle remove buttons dynamically
+  priceItems.addEventListener('click', function (e) {
+    if (e.target.classList.contains('remove-btn')) {
+      const index = parseInt(e.target.getAttribute('data-index'));
+      removeItem(index);
+    }
+  });
 
-.poster-title p { margin: 0; font-size: 1em; font-style: italic; color: #a6f0c6; }
-
-.date-box { margin-top: 20px; font-size: 1.1em; text-align: center; }
-
-.date-box input { margin-left: 10px; padding: 8px 14px; border-radius: 6px; border: none; font-weight: bold; }
-
-.price-list-heading { margin-top: 20px; background: #1db954; padding: 12px; border-radius: 6px; font-size: 1.7em; font-weight: bold; text-align: center; color: white; box-shadow: 0 0 5px rgba(0,0,0,0.3); }
-
-#priceItems { list-style: none; padding: 0; margin-top: 20px; }
-
-#priceItems li { background: rgba(255, 255, 255, 0.12); margin-bottom: 12px; padding: 14px 20px; border-radius: 8px; display: grid; grid-template-columns: 2fr 1fr auto; gap: 15px; align-items: center; font-size: 1.4em; font-weight: bold; color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-
-#priceItems li span:nth-child(2) { text-align: right; background: #ffffff; color: #0e1a25; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 1em; min-width: 80px; display: inline-block; }
-
-.remove-btn { background: #ff4c4c; color: white; border: none; border-radius: 50%; width: 28px; height: 28px; font-weight: bold; cursor: pointer; font-size: 1em; }
-
-.poster-footer { margin-top: 30px; font-size: 1em; background: rgba(0, 0, 0, 0.5); padding: 12px; border-radius: 10px; text-align: center; }
-
-.address { background: #00a86b; padding: 10px; border-radius: 6px; color: white; font-weight: bold; margin-bottom: 10px; }
-
-.contact { color: #a6f0c6; font-weight: bold; font-size: 1em; }
-
-.actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-
+  updateList();
+});
