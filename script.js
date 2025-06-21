@@ -74,7 +74,7 @@ clearAllBtn.addEventListener("click", () => { if (confirm("Clear all items?")) {
 
 dateInput.addEventListener("change", updateDate);
 
-downloadBtn.addEventListener("click", () => { const poster = document.getElementById("poster"); const removeBtns = poster.querySelectorAll(".remove-btn, .up-btn, .down-btn"); removeBtns.forEach(btn => btn.style.display = "none");
+downloadBtn.addEventListener("click", () => { const poster = document.getElementById("poster"); const tempBtns = poster.querySelectorAll(".remove-btn, .up-btn, .down-btn"); tempBtns.forEach(btn => btn.style.display = "none");
 
 updateDate();
 
@@ -83,7 +83,7 @@ html2canvas(poster, { useCORS: true, scale: 2 }).then(canvas => {
   link.download = `Solarax_Price_List_${dateText.textContent}.png`;
   link.href = canvas.toDataURL();
   link.click();
-  removeBtns.forEach(btn => btn.style.display = "inline-block");
+  tempBtns.forEach(btn => btn.style.display = "inline-block");
 });
 
 });
