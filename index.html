@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #eee;
+      background: #0f2027;
       margin: 0;
       padding: 20px;
       text-align: center;
@@ -14,10 +14,7 @@
   width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background:
-    linear-gradient(rgba(0, 80, 180, 0.6), rgba(0, 80, 180, 0.6)),
-    url('solar-bg.jpg') no-repeat center center;
-  background-size: cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), linear-gradient(to right, #0f2027, #203a43, #2c5364);
   color: white;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
@@ -58,7 +55,7 @@ h2, h3 {
 }
 
 .price-heading {
-  background: green;
+  background: #00a86b;
   color: white;
   padding: 10px;
   border-radius: 6px;
@@ -77,13 +74,17 @@ h2, h3 {
 }
 
 #priceItems li {
-  margin-bottom: 10px;
-  background-color: rgba(255,255,255,0.15);
-  padding: 10px 14px;
-  border-radius: 6px;
+  margin-bottom: 12px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #d4ffd4;
+  font-size: 1.4em;
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
 .remove-btn {
@@ -102,7 +103,7 @@ h2, h3 {
 }
 
 .address-box {
-  background: green;
+  background: #00a86b;
   color: white;
   padding: 10px;
   border-radius: 6px;
@@ -111,11 +112,14 @@ h2, h3 {
 }
 
 .contact-details {
-  background: rgba(0,0,0,0.4);
-  padding: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 15px;
   margin-top: 10px;
   border-radius: 6px;
-  font-size: 0.95em;
+  font-size: 1.05em;
+  font-weight: bold;
+  color: #d4ffd4;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
 #controls {
@@ -134,13 +138,13 @@ h2, h3 {
 }
 
 #controls button {
-  background-color: #0077b6;
+  background-color: #00a86b;
   color: white;
   cursor: pointer;
 }
 
 #controls button:hover {
-  background-color: #023e8a;
+  background-color: #007e55;
 }
 
   </style>
