@@ -14,6 +14,16 @@ function removeLast() { items.pop(); updateList(); }
 
 function clearAll() { items = []; updateList(); }
 
-function downloadImage() { html2canvas(document.getElementById("poster")).then(canvas => { const link = document.createElement("a"); link.download = Solarax_Price_List_${dateInput.value}.png; link.href = canvas.toDataURL(); link.click(); }); }
+function downloadImage() { // Temporarily hide remove buttons document.querySelectorAll(".remove-btn").forEach(btn => { btn.style.display = "none"; });
 
-window.onload = updateList;
+html2canvas(document.getElementById("poster")).then(canvas => { const link = document.createElement("a"); const date = dateInput.value || new Date().toLocaleDateString(); link.download = Solarax_Price_List_${date}.png; link.href = canvas.toDataURL(); link.click();
+
+// Show buttons again
+document.querySelectorAll(".remove-btn").forEach(btn => {
+  btn.style.display = "inline-block";
+});
+
+}); }
+
+// Initialize list on load window.onload = updateList;
+
