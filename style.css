@@ -26,9 +26,9 @@ button:hover { background: #007c50; }
 
 .poster-title p { margin: 5px 0 0 0; font-size: 1.3em; font-style: italic; color: #a6f0c6; text-align: center; }
 
-.date-box { margin-top: 20px; display: flex; justify-content: center; align-items: center; background: #1db954; padding: 10px 20px; border-radius: 8px; color: #ffffff; font-size: 1.3em; font-weight: bold; text-align: center; max-width: 300px; margin-left: auto; margin-right: auto; }
+.date-box { margin-top: 20px; font-size: 1.2em; text-align: center; display: flex; justify-content: center; align-items: center; gap: 10px; background: #007bff; padding: 10px 20px; border-radius: 8px; color: #ffffff; font-weight: bold; width: fit-content; margin-left: auto; margin-right: auto; }
 
-.price-list-heading { margin-top: 25px; background: #1db954; padding: 16px; border-radius: 8px; font-size: 2.2em; font-weight: bold; text-align: center; color: white; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
+.price-list-heading { margin-top: 20px; background: #1db954; padding: 18px; border-radius: 6px; font-size: 2.2em; font-weight: bold; text-align: center; color: white; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
 
 #priceItems { list-style: none; padding: 0; margin-top: 20px; }
 
