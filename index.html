@@ -2,60 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solarax Energy - Daily Price List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Solarax Energy Daily Price List</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-  <main>
-    <!-- Top Entry Form -->
-    <section id="input-section">
-      <h1>Solarax Energy - Price Entry</h1>
-      <div class="form-group">
-        <input type="text" id="itemInput" placeholder="Enter item name" />
-        <input type="text" id="priceInput" placeholder="Enter price" />
-        <button onclick="addItem()">Add</button>
+
+<main>
+  <!-- Input Section -->
+  <section id="input-section">
+    <h1>Enter Product Details</h1>
+    <div class="form-group">
+      <input type="text" id="itemName" placeholder="Item Name" />
+      <input type="text" id="itemPrice" placeholder="Price" />
+    </div>
+    <div class="form-group">
+      <input type="date" id="date" />
+    </div>
+    <div class="actions">
+      <button id="addItem">Add Item</button>
+      <button id="clearAll">Clear All</button>
+      <button id="download">Download Poster</button>
+    </div>
+  </section>
+
+  <!-- Poster Preview Section -->
+  <section id="poster">
+    <div class="poster-header">
+      <img id="logo" src="logo.png" alt="Solarax Logo" />
+      <div class="poster-title">
+        <h2>Solarax Energy</h2>
+        <p>Harnessing the Infinite</p>
       </div>
-      <div class="actions">
-        <button onclick="removeLast()">Remove Last</button>
-        <button onclick="clearAll()">Clear All</button>
-        <button onclick="downloadImage()">Download Poster</button>
+    </div>
+
+    <div class="date-box">
+      <strong>Date:</strong>
+      <span id="poster-date-text">--/--/----</span>
+    </div>
+
+    <div class="price-list-heading">DAILY PRICE LIST</div>
+
+    <ul id="priceItems"></ul>
+
+    <div class="poster-footer">
+      <div class="address">Address: Anora Morr, Sector No. 4, Khalabat Township, Haripur</div>
+      <div class="contact">
+        Email: Solaraxenergy@gmail.com<br/>
+        Contact No: 0313-8996042<br/>
+        0342-8996775
       </div>
-    </section>
+    </div>
+  </section>
+</main>
 
-    <!-- Poster Section -->
-    <section id="poster">
-      <div class="poster-header">
-        <img id="logo" src="logo.png" alt="Solarax Energy Logo" />
-        <div class="poster-title">
-          <h2>Solarax Energy</h2>
-          <p>Harnessing the Infinite</p>
-        </div>
-      </div>
+<!-- JS Script -->
+<script src="script.js"></script>
 
-      <div class="date-box">
-        <strong>Date:</strong>
-        <input type="date" id="dateInput" />
-      </div>
+<!-- html2canvas for image generation -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
-      <h3 class="price-list-heading">DAILY PRICE LIST</h3>
-
-      <ul id="priceItems">
-        <!-- JavaScript will populate items here -->
-      </ul>
-
-      <footer class="poster-footer">
-        <div class="address">
-          Address: Anora Morr, Sector No. 4, Khalabat Township, Haripur
-        </div>
-        <div class="contact">
-          Email: Solaraxenergy@gmail.com | Contact: 0313-8996042, 0342-8996775
-        </div>
-      </footer>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
