@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Solarax Energy Daily Price List</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-
-<main>
+<body><main>
   <!-- Input Section -->
   <section id="input-section">
     <h1>Enter Product Details</h1>
@@ -24,43 +21,33 @@
       <button id="clearAll">Clear All</button>
       <button id="download">Download Poster</button>
     </div>
-  </section>
-
-  <!-- Poster Preview Section -->
-  <section id="poster">
+  </section>  <!-- Poster Preview Section -->  <section id="poster">
     <div class="poster-header">
-      <img id="logo" src="logo.png" alt="Solarax Logo" />
-      <div class="poster-title">
-        <h2>Solarax Energy</h2>
-        <p>Harnessing the Infinite</p>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <img id="logo" src="logo.png" alt="Solarax Logo" style="height: 120px;" />
+        <div class="poster-title">
+          <h2>Solarax Energy</h2>
+          <p>Harnessing the Infinite</p>
+        </div>
       </div>
-    </div>
+    </div><div class="date-box">
+  <strong>Date:</strong>
+  <span id="poster-date-text">--/--/----</span>
+</div>
 
-    <div class="date-box">
-      <strong>Date:</strong>
-      <span id="poster-date-text">--/--/----</span>
-    </div>
+<div class="price-list-heading">DAILY PRICE LIST</div>
 
-    <div class="price-list-heading">DAILY PRICE LIST</div>
+<ul id="priceItems"></ul>
 
-    <ul id="priceItems"></ul>
+<div class="poster-footer">
+  <div class="address">Address: Anora Morr, Sector No. 4, Khalabat Township, Haripur</div>
+  <div class="contact">
+    Email: Solaraxenergy@gmail.com<br />
+    Contact No: 0313-8996042<br />
+    0342-8996775
+  </div>
+</div>
 
-    <div class="poster-footer">
-      <div class="address">Address: Anora Morr, Sector No. 4, Khalabat Township, Haripur</div>
-      <div class="contact">
-        Email: Solaraxenergy@gmail.com<br/>
-        Contact No: 0313-8996042<br/>
-        0342-8996775
-      </div>
-    </div>
   </section>
-</main>
-
-<!-- JS Script -->
-<script src="script.js"></script>
-
-<!-- html2canvas for image generation -->
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
-</body>
+</main><script src="script.js"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script></body>
 </html>
