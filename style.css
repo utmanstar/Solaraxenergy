@@ -1,54 +1,191 @@
-/* style.css */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0e1a25;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
 
-body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0e1a25; color: #fff; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+main {
+  width: 100%;
+  max-width: 1000px;
+}
 
-main { width: 100%; max-width: 1000px; }
+#input-section {
+  background: #122c3d;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
 
-#input-section { background: #122c3d; padding: 20px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-h1 { margin-bottom: 20px; text-align: center; }
+.form-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 15px;
+}
 
-.form-group { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 15px; }
+input[type="text"],
+input[type="date"] {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  min-width: 200px;
+  font-size: 1em;
+}
 
-input[type="text"], input[type="date"] { padding: 10px; border: none; border-radius: 5px; min-width: 200px; font-size: 1em; }
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #00a86b;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
 
-button { padding: 10px 20px; border: none; border-radius: 5px; background: #00a86b; color: #fff; font-weight: bold; cursor: pointer; transition: background 0.3s ease; }
+button:hover {
+  background: #007c50;
+}
 
-button:hover { background: #007c50; }
+#poster {
+  background: linear-gradient(rgba(10, 15, 20, 0.97), rgba(10, 15, 20, 0.97)), url('solar-bg.jpg') center center / cover;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  color: white;
+}
 
-#poster { background: linear-gradient(rgba(10, 15, 20, 0.97), rgba(10, 15, 20, 0.97)), url('solar-bg.jpg') center center / cover; padding: 30px; border-radius: 12px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); color: white; }
+.poster-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+}
 
-.poster-header { display: flex; align-items: center; gap: 20px; justify-content: center; text-align: center; }
+#logo {
+  height: 140px;
+}
 
-#logo { height: 140px; }
+.poster-title h2 {
+  font-size: 3em;
+  margin: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 
-.poster-title h2 { font-size: 3em; margin: 0; font-weight: bold; text-transform: uppercase; }
+.poster-title p {
+  margin: 5px 0 0 0;
+  font-size: 1.1em;
+  font-style: italic;
+  color: #a6f0c6;
+  text-align: center;
+}
 
-.poster-title p { margin: 5px 0 0 0; font-size: 1.1em; font-style: italic; color: #a6f0c6; text-align: center; }
+.date-box {
+  margin-top: 20px;
+  font-size: 1.1em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 
-.date-box { margin-top: 20px; font-size: 1.1em; text-align: center; display: flex; justify-content: center; align-items: center; gap: 10px; }
+.price-list-heading {
+  margin-top: 20px;
+  background: #1db954;
+  padding: 14px;
+  border-radius: 6px;
+  font-size: 1.8em;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
 
-.date-box input { padding: 8px 14px; border-radius: 6px; border: none; font-weight: bold; text-align: center; font-size: 1em; }
+#priceItems {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
 
-#poster-date-text { font-weight: bold; }
+#priceItems li {
+  background: rgba(255, 255, 255, 0.12);
+  margin-bottom: 12px;
+  padding: 16px 22px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 15px;
+  align-items: center;
+  font-size: 1.7em;
+  font-weight: bold;
+  color: #fff;
+}
 
-.price-list-heading { margin-top: 20px; background: #1db954; padding: 14px; border-radius: 6px; font-size: 1.8em; font-weight: bold; text-align: center; color: white; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
+#priceItems li span:nth-child(2) {
+  text-align: right;
+  background: #ffffff;
+  color: #0e1a25;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 900;
+  font-size: 1.2em;
+  min-width: 120px;
+}
 
-#priceItems { list-style: none; padding: 0; margin-top: 20px; }
+.remove-btn {
+  background: #ff4c4c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1em;
+}
 
-#priceItems li { background: rgba(255, 255, 255, 0.12); margin-bottom: 12px; padding: 16px 22px; border-radius: 8px; display: grid; grid-template-columns: 2fr 1fr auto auto auto; gap: 10px; align-items: center; font-size: 1.5em; font-weight: bold; color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+.poster-footer {
+  margin-top: 30px;
+  font-size: 1em;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
 
-#priceItems li span:nth-child(2) { text-align: right; background: #ffffff; color: #0e1a25; padding: 10px 16px; border-radius: 6px; font-weight: 900; font-size: 1.2em; min-width: 120px; display: inline-block; }
+.address {
+  background: #00a86b;
+  padding: 10px;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
-.remove-btn, .up-btn, .down-btn { background: #ff4c4c; color: white; border: none; border-radius: 50%; width: 28px; height: 28px; font-weight: bold; cursor: pointer; font-size: 1em; }
+.contact {
+  color: #a6f0c6;
+  font-weight: bold;
+  white-space: pre-line;
+}
 
-.up-btn, .down-btn { background: #1e90ff; }
-
-.poster-footer { margin-top: 30px; font-size: 1em; background: rgba(0, 0, 0, 0.5); padding: 12px; border-radius: 10px; text-align: center; }
-
-.address { background: #00a86b; padding: 10px; border-radius: 6px; color: white; font-weight: bold; margin-bottom: 10px; }
-
-.contact { color: #a6f0c6; font-weight: bold; font-size: 1em; white-space: pre-line; line-height: 1.6em; }
-
-.actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
