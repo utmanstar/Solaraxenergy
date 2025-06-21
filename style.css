@@ -1,6 +1,6 @@
 /* style.css */
 
-body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0e1a25; color: #fff; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+body { margin: 0; font-family: 'Poppins', sans-serif; background: #0e1a25; color: #fff; display: flex; flex-direction: column; align-items: center; padding: 20px; }
 
 main { width: 100%; max-width: 1000px; }
 
@@ -18,21 +18,25 @@ button:hover { background: #007c50; }
 
 #poster { background: linear-gradient(rgba(10, 15, 20, 0.97), rgba(10, 15, 20, 0.97)), url('solar-bg.jpg') center center / cover; padding: 30px; border-radius: 12px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); color: white; }
 
-.poster-header { display: flex; align-items: center; justify-content: center; gap: 20px; text-align: center; flex-direction: column; }
+.poster-header { display: flex; align-items: center; justify-content: center; text-align: center; gap: 20px; }
 
-#logo { height: 140px; }
+#logo { height: 140px; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); }
 
 .poster-title h2 { font-size: 3em; margin: 0; font-weight: bold; text-transform: uppercase; }
 
-.poster-title p { margin: 5px 0 0 0; font-size: 1.5em; font-style: italic; color: #a6f0c6; text-align: center; }
+.poster-title p { margin: 5px 0 0 0; font-size: 1.4em; font-style: italic; color: #a6f0c6; text-align: center; }
 
-.date-box { margin-top: 20px; font-size: 2.5em; font-weight: 900; text-align: center; background: #007bff; color: white; padding: 16px 24px; border-radius: 8px; border: 2px solid white; text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); display: inline-block; width: fit-content; margin-left: auto; margin-right: auto; }
+.date-box { margin-top: 20px; font-size: 1.5em; text-align: center; display: flex; justify-content: center; align-items: center; gap: 10px; background: #007acc; color: #fff; padding: 12px; border-radius: 6px; width: 100%; box-sizing: border-box; }
+
+.date-box input { padding: 8px 14px; border-radius: 6px; border: none; font-weight: bold; text-align: center; font-size: 1em; }
 
 .price-list-heading { margin-top: 20px; background: #1db954; padding: 14px; border-radius: 6px; font-size: 1.8em; font-weight: bold; text-align: center; color: white; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
 
 #priceItems { list-style: none; padding: 0; margin-top: 20px; }
 
-#priceItems li { background: rgba(255, 255, 255, 0.12); margin-bottom: 12px; padding: 16px 22px; border-radius: 8px; display: grid; grid-template-columns: 2fr 1fr auto; gap: 15px; align-items: center; font-size: 1.7em; font-weight: bold; color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+#priceItems li { background: rgba(255, 255, 255, 0.12); margin-bottom: 12px; padding: 16px 22px; border-radius: 8px; display: grid; grid-template-columns: 2fr 1fr auto; gap: 15px; align-items: center; font-size: 1.7em; font-weight: bold; color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border-left: 4px solid #1db954; }
+
+#priceItems li:nth-child(even) { background: rgba(255, 255, 255, 0.08); }
 
 #priceItems li span:nth-child(2) { text-align: right; background: #ffffff; color: #0e1a25; padding: 10px 16px; border-radius: 6px; font-weight: 900; font-size: 1.2em; min-width: 120px; display: inline-block; }
 
@@ -40,9 +44,15 @@ button:hover { background: #007c50; }
 
 .poster-footer { margin-top: 30px; font-size: 1em; background: rgba(0, 0, 0, 0.5); padding: 12px; border-radius: 10px; text-align: center; }
 
-.address { background: #00a86b; padding: 10px; border-radius: 6px; color: white; font-weight: bold; margin-bottom: 10px; }
+.address { background: #00a86b; padding: 10px; border-radius: 6px; color: white; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
-.contact { color: #a6f0c6; font-weight: bold; white-space: pre-line; }
+.address::before { content: '📍'; }
+
+.contact { color: #a6f0c6; font-weight: bold; white-space: pre-line; line-height: 1.6em; }
+
+.contact::before { content: '📧 '; display: block; }
+
+.contact br + br::before { content: '📞 '; display: block; }
 
 .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
 
