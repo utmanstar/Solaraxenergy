@@ -24,19 +24,17 @@ button:hover { background: #007c50; }
 
 .poster-title h2 { font-size: 3em; margin: 0; font-weight: bold; text-transform: uppercase; }
 
-.poster-title p { margin: 5px 0 0 0; font-size: 1.4em; font-style: italic; color: #a6f0c6; text-align: center; font-weight: 500; }
+.poster-title p { margin: 5px 0 0 0; font-size: 1.3em; font-style: italic; color: #a6f0c6; text-align: center; }
 
-.date-box { margin-top: 20px; font-size: 1.5em; display: flex; justify-content: center; align-items: center; gap: 10px; }
+.date-box { margin-top: 20px; display: flex; justify-content: center; align-items: center; background: #1db954; padding: 10px 20px; border-radius: 8px; color: #ffffff; font-size: 1.3em; font-weight: bold; text-align: center; max-width: 300px; margin-left: auto; margin-right: auto; }
 
-#poster-date-text { background: #1d3557; color: #fff; padding: 10px 18px; border-radius: 8px; font-weight: bold; font-size: 1.2em; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
-
-.price-list-heading { margin-top: 20px; background: #1db954; padding: 14px; border-radius: 6px; font-size: 1.8em; font-weight: bold; text-align: center; color: white; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
+.price-list-heading { margin-top: 25px; background: #1db954; padding: 16px; border-radius: 8px; font-size: 2.2em; font-weight: bold; text-align: center; color: white; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
 
 #priceItems { list-style: none; padding: 0; margin-top: 20px; }
 
-#priceItems li { background: rgba(255, 255, 255, 0.12); margin-bottom: 12px; padding: 16px 22px; border-radius: 8px; display: grid; grid-template-columns: 2fr 1fr auto; gap: 15px; align-items: center; font-size: 1.7em; font-weight: bold; color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+#priceItems li { background: rgba(255, 255, 255, 0.12); margin-bottom: 12px; padding: 16px 22px; border-radius: 8px; display: grid; grid-template-columns: 2fr 1fr auto; gap: 15px; align-items: center; font-size: 1.7em; font-weight: bold; color: #fff; }
 
-#priceItems li span:nth-child(2) { text-align: right; background: #ffffff; color: #0e1a25; padding: 10px 16px; border-radius: 6px; font-weight: 900; font-size: 1.2em; min-width: 120px; display: inline-block; }
+#priceItems li span:nth-child(2) { text-align: right; background: #ffffff; color: #0e1a25; padding: 10px 16px; border-radius: 6px; font-weight: 900; font-size: 1.2em; min-width: 120px; }
 
 .remove-btn { background: #ff4c4c; color: white; border: none; border-radius: 50%; width: 28px; height: 28px; font-weight: bold; cursor: pointer; font-size: 1em; }
 
@@ -44,7 +42,7 @@ button:hover { background: #007c50; }
 
 .address { background: #00a86b; padding: 10px; border-radius: 6px; color: white; font-weight: bold; margin-bottom: 10px; }
 
-.contact { color: #a6f0c6; font-weight: bold; white-space: pre-line; line-height: 1.6em; }
+.contact { color: #a6f0c6; font-weight: bold; white-space: pre-line; }
 
 .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
 
