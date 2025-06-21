@@ -1,47 +1,56 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Solarax Energy - Daily Price List</title>
   <link rel="stylesheet" href="style.css" />
-</head><body>
+</head>
+<body>
   <main>
     <section id="input-section">
-      <h1>Solarax Energy Price Entry</h1>
+      <h1>Solarax Energy - Daily Price Manager</h1>
       <div class="form-group">
-        <input type="text" id="itemName" placeholder="Enter item name" />
-        <input type="text" id="itemPrice" placeholder="Enter item price" />
+        <input type="text" id="itemName" placeholder="Item name" />
+        <input type="text" id="itemPrice" placeholder="Price" />
         <button id="addItem">Add</button>
-        <button id="clearAll">Remove All</button>
+        <button id="clearAll">Clear All</button>
+        <button id="download">Download Poster</button>
       </div>
       <div class="form-group">
-        <label for="date">Select Date:</label>
         <input type="date" id="date" />
-        <button id="download">Download Image</button>
       </div>
-    </section><section id="poster">
-  <div class="poster-header">
-    <img id="logo" src="logo.png" alt="Solarax Energy Logo" />
-    <div class="poster-title">
-      <h2>Solarax Energy</h2>
-      <p>Harnessing the Infinite</p>
-    </div>
-  </div>
+    </section>
 
-  <div class="date-box">
-    <strong>Date:</strong> <span id="poster-date-text"></span>
-  </div>
+    <section id="poster">
+      <div class="poster-header">
+        <img id="logo" src="logo.png" alt="Logo" />
+        <div class="poster-title">
+          <h2>Solarax Energy</h2>
+          <p>Harnessing the Infinite</p>
+        </div>
+      </div>
 
-  <div class="price-list-heading">DAILY PRICE LIST</div>
-  <ul id="priceItems"></ul>
+      <div class="date-box">
+        <strong>Date:</strong>
+        <span id="poster-date-text">dd-mm-yyyy</span>
+      </div>
 
-  <div class="poster-footer">
-    <div class="address">Anora Morr, Sector No. 4, Khalabat Township, Haripur</div>
-    <div class="contact">
-      Email: solaraxenergy@gmail.com<br />
-      Contact: 0313-8996042<br />
-      0342-8996775
-    </div>
-  </div>
-</section>
+      <div class="price-list-heading">Daily Price List</div>
+      <ul id="priceItems"></ul>
 
-  </main>  <script src="script.js"></script></body></html>
+      <div class="poster-footer">
+        <div class="address">Anora Morr, Sector No. 4, Khalabat Township, Haripur</div>
+        <div class="contact">
+          Email: Solaraxenergy@gmail.com<br>
+          Contact No: 0313-8996042<br>
+          0342-8996775
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
