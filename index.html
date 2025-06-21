@@ -9,22 +9,22 @@
 <body>
   <main>
     <section id="input-section">
-      <h1>Daily Price Entry</h1>
+      <h1>Solarax Energy - Daily Price Manager</h1>
       <div class="form-group">
-        <input type="text" id="itemName" placeholder="Item Name" />
+        <input type="text" id="itemName" placeholder="Item name" />
         <input type="text" id="itemPrice" placeholder="Price" />
         <button id="addItem">Add</button>
-        <button id="clearAll">Remove All</button>
+        <button id="clearAll">Clear All</button>
+        <button id="download">Download Poster</button>
       </div>
       <div class="form-group">
         <input type="date" id="date" />
-        <button id="download">Download Image</button>
       </div>
     </section>
 
     <section id="poster">
       <div class="poster-header">
-        <img id="logo" src="logo.png" alt="Solarax Logo" />
+        <img id="logo" src="logo.png" alt="Logo" />
         <div class="poster-title">
           <h2>Solarax Energy</h2>
           <p>Harnessing the Infinite</p>
@@ -33,16 +33,14 @@
 
       <div class="date-box">
         <strong>Date:</strong>
-        <span id="poster-date-text">--/--/----</span>
+        <span id="poster-date-text">dd-mm-yyyy</span>
       </div>
 
       <div class="price-list-heading">Daily Price List</div>
       <ul id="priceItems"></ul>
 
       <div class="poster-footer">
-        <div class="address">
-          Address: Anora Morr, Sector No. 4, Khalabat Township, Haripur
-        </div>
+        <div class="address">Anora Morr, Sector No. 4, Khalabat Township, Haripur</div>
         <div class="contact">
           Email: Solaraxenergy@gmail.com<br>
           Contact No: 0313-8996042<br>
