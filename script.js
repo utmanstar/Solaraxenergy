@@ -18,61 +18,90 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateDate() {
     const dateText = document.getElementById("poster-date-text");
     const dateVal = dateInput.value;
-    dateText.textContent = dateVal ? formatDate(dateVal) : "";
+    dateText.textContent = dateVal ? formatDate(dateVal) : "--/--/----";
+    localStorage.setItem("posterDate", dateVal);
   }
 
-  // Event: On date change
-  dateInput.addEventListener("change", updateDate);
+  // ✅ Render list item
+  function createListItem(name, price) {
+    const li = document.createElement("li");
 
-  // ✅ Add Item to List
+    const nameSpan = document.createElement("span");
+    nameSpan.textContent = name;
+
+    const priceSpan = document.createElement("span");
+    priceSpan.textContent = price;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "✕";
+    removeBtn.classList.add("remove-btn");
+    removeBtn.addEventListener("click", () => {
+      li.remove();
+      saveItems();
+    });
+
+    li.appendChild(nameSpan);
+    li.appendChild(priceSpan);
+    li.appendChild(removeBtn);
+    priceItemsList.appendChild(li);
+  }
+
+  // ✅ Save to localStorage
+  function saveItems() {
+    const items = [];
+    document.querySelectorAll("#priceItems li").forEach(li => {
+      const [nameSpan, priceSpan] = li.querySelectorAll("span");
+      items.push({ name: nameSpan.textContent, price: priceSpan.textContent });
+    });
+    localStorage.setItem("priceItems", JSON.stringify(items));
+  }
+
+  // ✅ Load from localStorage
+  function loadItems() {
+    const savedItems = JSON.parse(localStorage.getItem("priceItems") || "[]");
+    savedItems.forEach(item => createListItem(item.name, item.price));
+
+    const savedDate = localStorage.getItem("posterDate");
+    if (savedDate) {
+      dateInput.value = savedDate;
+      updateDate();
+    }
+  }
+
+  // ✅ Event Listeners
   addItemBtn.addEventListener("click", () => {
     const itemName = itemNameInput.value.trim();
     const itemPrice = itemPriceInput.value.trim();
 
     if (!itemName || !itemPrice) return;
 
-    const li = document.createElement("li");
-
-    const nameSpan = document.createElement("span");
-    nameSpan.textContent = itemName;
-
-    const priceSpan = document.createElement("span");
-    priceSpan.textContent = itemPrice;
-
-    const removeBtn = document.createElement("button");
-    removeBtn.textContent = "✕";
-    removeBtn.classList.add("remove-btn");
-    removeBtn.addEventListener("click", () => li.remove());
-
-    li.appendChild(nameSpan);
-    li.appendChild(priceSpan);
-    li.appendChild(removeBtn);
-
-    priceItemsList.appendChild(li);
-
+    createListItem(itemName, itemPrice);
     itemNameInput.value = "";
     itemPriceInput.value = "";
+    saveItems();
   });
 
-  // ✅ Clear all items
   clearAllBtn.addEventListener("click", () => {
     priceItemsList.innerHTML = "";
+    localStorage.removeItem("priceItems");
   });
 
-  // ✅ Download as Image
+  dateInput.addEventListener("change", updateDate);
+
   downloadBtn.addEventListener("click", () => {
-    updateDate(); // Ensure latest date is visible
+    updateDate(); // ensure latest date is reflected
 
-    const poster = document.getElementById("poster");
-
-    html2canvas(poster, {
+    html2canvas(document.getElementById("poster"), {
       useCORS: true,
       scale: 2,
-    }).then((canvas) => {
+    }).then(canvas => {
       const link = document.createElement("a");
-      link.download = `Solarax_Price_List_${formatDate(dateInput.value)}.png`;
+      const dateStr = formatDate(dateInput.value);
+      link.download = `Solarax_Price_List_${dateStr}.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
     });
   });
+
+  loadItems();
 });
