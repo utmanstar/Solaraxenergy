@@ -17,7 +17,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateVal = dateInput.value;
     if (dateVal) {
       dateText.textContent = formatDate(dateVal);
+      localStorage.setItem("selectedDate", dateVal);
     }
+  }
+
+  function saveItemsToLocalStorage() {
+    const items = [];
+    document.querySelectorAll("#priceItems li").forEach(li => {
+      const spans = li.querySelectorAll("span");
+      if (spans.length >= 2) {
+        items.push({
+          name: spans[0].textContent,
+          price: spans[1].textContent
+        });
+      }
+    });
+    localStorage.setItem("priceListItems", JSON.stringify(items));
+  }
+
+  function loadItemsFromLocalStorage() {
+    const items = JSON.parse(localStorage.getItem("priceListItems") || "[]");
+    items.forEach(item => addItem(item.name, item.price));
   }
 
   function addItem(name, price) {
@@ -29,7 +49,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "✕";
     removeBtn.classList.add("remove-btn");
-    removeBtn.addEventListener("click", () => li.remove());
+    removeBtn.addEventListener("click", () => {
+      li.remove();
+      saveItemsToLocalStorage();
+    });
 
     li.appendChild(nameSpan);
     li.appendChild(priceSpan);
@@ -44,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!itemName || !itemPrice) return;
 
     addItem(itemName, itemPrice);
+    saveItemsToLocalStorage();
 
     itemNameInput.value = "";
     itemPriceInput.value = "";
@@ -52,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
   clearAllBtn.addEventListener("click", () => {
     if (confirm("Clear all items?")) {
       priceItemsList.innerHTML = "";
+      localStorage.removeItem("priceListItems");
     }
   });
 
@@ -77,4 +102,14 @@ document.addEventListener("DOMContentLoaded", function () {
       removeBtns.forEach(btn => btn.style.display = "block");
     });
   });
+
+  // Initial load
+  loadItemsFromLocalStorage();
+
+  // Restore selected date if available
+  const savedDate = localStorage.getItem("selectedDate");
+  if (savedDate) {
+    dateInput.value = savedDate;
+    updateDate();
+  }
 });
