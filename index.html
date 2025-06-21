@@ -1,50 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solarax Energy - Daily Price List</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Solarax Energy - Daily Price List</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo-container">
-                <img src="logo.png" alt="Solarax Energy Logo" class="logo">
-                <h1>SOLARAX ENERGY</h1>
-            </div>
-            <p class="motto">Harnessing the Infinite</p>
-            
-            <div class="main-heading-row">
-                <h2>DAILY PRICE LIST</h2>
-                <div class="date-selector">
-                    <label for="priceDate">Date:</label>
-                    <input type="date" id="priceDate">
-                </div>
-            </div>
-        </header>
+  <div id="poster">
+    <img src="logo.png" id="logo" alt="Solarax Energy Logo" />
+    <h1>Solarax Energy</h1>
+    <h3>Harnessing the Infinite</h3>
 
-        <section class="price-list-section">
-            <div id="priceItems">
-                </div>
-            <div class="controls">
-                <button id="insertItemBtn"><i class="fas fa-plus"></i> Insert Item</button>
-                <button id="clearAllBtn"><i class="fas fa-broom"></i> Clear All Items</button>
-            </div>
-        </section>
-
-        <button id="downloadImageBtn" class="download-btn"><i class="fas fa-download"></i> Download Price List Image</button>
-
-        <footer class="contact-info-box">
-            <h3>Contact Information</h3>
-            <p>Adress: Anora Morr, Sector No. 4, Khalabat Townsh, Haripur</p>
-            <p>Email: solaraxenergy@gmail.com</p>
-            <p>Contact No: 0313-8996042 , 0342-8996775</p>
-        </footer>
+    <div class="date-section">
+      <label for="dateInput">Date:</label>
+      <input type="date" id="dateInput" />
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="script.js"></script>
+    <h2>DAILY PRICE LIST</h2>
+
+    <ul id="priceItems"></ul>
+
+    <div class="contact">
+      <strong>Address:</strong> Anora Morr, Sector No. 4, Khalabat Township, Haripur<br/>
+      <strong>Email:</strong> Solaraxenergy@gmail.com<br/>
+      <strong>Contact No:</strong> 0313-8996042 , 0342-8996775
+    </div>
+  </div>
+
+  <div id="controls">
+    <input type="text" id="itemInput" placeholder="Item Name" />
+    <input type="text" id="priceInput" placeholder="Price" />
+    <button onclick="addItem()">Insert</button>
+    <button onclick="removeLast()">Remove</button>
+    <button onclick="clearAll()">Remove All</button>
+    <button onclick="downloadImage()">Download</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
