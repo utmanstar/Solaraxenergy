@@ -1,4 +1,4 @@
- // script.js
+// script.js
 
 document.addEventListener('DOMContentLoaded', function () { const itemInput = document.getElementById('itemInput'); const priceInput = document.getElementById('priceInput'); const priceItems = document.getElementById('priceItems'); const dateInput = document.getElementById('dateInput');
 
