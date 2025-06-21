@@ -12,9 +12,7 @@ body { font-family: 'Segoe UI', sans-serif; background: #0f2027; margin: 0; padd
 
 .date-section { margin-top: 10px; font-size: 1.1em; }
 
-.date-section input { font-size: 1em; padding: 5px; border-radius: 5px; border: none; }
-
-h2, h3 { margin: 5px 0; }
+.date-section input { font-size: 1em; padding: 5px 10px; border-radius: 5px; border: none; width: 180px; }
 
 .price-heading { background: #00a86b; color: white; padding: 10px; border-radius: 6px; font-weight: bold; font-size: 1.5em; margin-top: 20px; }
 
