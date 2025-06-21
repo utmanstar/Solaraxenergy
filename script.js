@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     priceItemsList.appendChild(li);
 
-    // Clear inputs
     itemNameInput.value = "";
     itemPriceInput.value = "";
   });
