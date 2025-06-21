@@ -1,3 +1,5 @@
+/* style.css */
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -96,12 +98,17 @@ button:hover {
 
 .date-box {
   margin-top: 20px;
-  font-size: 1.1em;
+  font-size: 1.3em;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  background: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
 }
 
 .price-list-heading {
@@ -113,6 +120,7 @@ button:hover {
   font-weight: bold;
   text-align: center;
   color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 #priceItems {
@@ -133,6 +141,7 @@ button:hover {
   font-size: 1.7em;
   font-weight: bold;
   color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #priceItems li span:nth-child(2) {
