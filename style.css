@@ -20,6 +20,10 @@ body { font-family: 'Segoe UI', sans-serif; background: #0f2027; margin: 0; padd
 
 #priceItems li { margin-bottom: 12px; background-color: rgba(255, 255, 255, 0.15); color: #d4ffd4; font-size: 1.4em; font-weight: 700; padding: 12px 18px; border-radius: 8px; display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
 
+#priceItems li span { display: inline-block; width: 100%; }
+
+#priceItems li span:nth-child(2) { text-align: right; min-width: 80px; }
+
 .remove-btn { background: #ff5e5e; color: white; border: none; border-radius: 50%; width: 25px; height: 25px; font-weight: bold; cursor: pointer; justify-self: end; }
 
 .contact-box { margin-top: 30px; }
