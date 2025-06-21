@@ -18,11 +18,9 @@ button:hover { background: #007c50; }
 
 #poster { background: linear-gradient(rgba(10, 15, 20, 0.97), rgba(10, 15, 20, 0.97)), url('solar-bg.jpg') center center / cover; padding: 30px; border-radius: 12px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); color: white; }
 
-.poster-header { display: flex; align-items: center; gap: 20px; justify-content: flex-start; flex-direction: row; text-align: left; }
+.poster-header { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px; }
 
-#logo { height: 70px; }
-
-.poster-title { display: flex; flex-direction: column; justify-content: center; }
+#logo { height: 140px; }
 
 .poster-title h2 { font-size: 3em; margin: 0; font-weight: bold; text-transform: uppercase; }
 
