@@ -1,43 +1,196 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Solarax Energy - Daily Price List</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #eee;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }#poster {
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('solar-bg.jpg') no-repeat center center;
+  background-size: cover;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+#logo {
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.date-section {
+  margin-top: 10px;
+  font-size: 1.1em;
+}
+
+.date-section input {
+  font-size: 1em;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
+h1, h2, h3 {
+  margin: 5px 0;
+}
+
+#priceItems {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  font-size: 1.2em;
+  text-align: left;
+}
+
+#priceItems li {
+  margin-bottom: 10px;
+  background-color: rgba(255,255,255,0.15);
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remove-btn {
+  background: #ff5e5e;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.contact {
+  margin-top: 30px;
+  background: rgba(0,0,0,0.5);
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.95em;
+}
+
+#controls {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+#controls input, #controls button {
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: none;
+}
+
+#controls button {
+  background-color: #0077b6;
+  color: white;
+  cursor: pointer;
+}
+
+#controls button:hover {
+  background-color: #023e8a;
+}
+
+  </style>
 </head>
 <body>
   <div id="poster">
     <img src="logo.png" id="logo" alt="Solarax Energy Logo" />
     <h1>Solarax Energy</h1>
-    <h3>Harnessing the Infinite</h3>
+    <h3>Harnessing the Infinite</h3><div class="date-section">
+  <label for="dateInput">Date:</label>
+  <input type="date" id="dateInput" />
+</div>
 
-    <div class="date-section">
-      <label for="dateInput">Date:</label>
-      <input type="date" id="dateInput" />
-    </div>
+<h2>DAILY PRICE LIST</h2>
 
-    <h2>DAILY PRICE LIST</h2>
+<ul id="priceItems"></ul>
 
-    <ul id="priceItems"></ul>
+<div class="contact">
+  <strong>Address:</strong> Anora Morr, Sector No. 4, Khalabat Township, Haripur<br/>
+  <strong>Email:</strong> Solaraxenergy@gmail.com<br/>
+  <strong>Contact No:</strong> 0313-8996042 , 0342-8996775
+</div>
 
-    <div class="contact">
-      <strong>Address:</strong> Anora Morr, Sector No. 4, Khalabat Township, Haripur<br/>
-      <strong>Email:</strong> Solaraxenergy@gmail.com<br/>
-      <strong>Contact No:</strong> 0313-8996042 , 0342-8996775
-    </div>
-  </div>
-
-  <div id="controls">
+  </div>  <div id="controls">
     <input type="text" id="itemInput" placeholder="Item Name" />
     <input type="text" id="priceInput" placeholder="Price" />
     <button onclick="addItem()">Insert</button>
     <button onclick="removeLast()">Remove</button>
     <button onclick="clearAll()">Remove All</button>
     <button onclick="downloadImage()">Download</button>
-  </div>
+  </div>  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>  <script>
+    const priceItems = document.getElementById("priceItems");
+    const itemInput = document.getElementById("itemInput");
+    const priceInput = document.getElementById("priceInput");
+    const dateInput = document.getElementById("dateInput");
 
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script src="script.js"></script>
-</body>
+    let items = JSON.parse(localStorage.getItem("solarax_items")) || [];
+
+    function updateList() {
+      priceItems.innerHTML = "";
+      items.forEach(({ item, price }, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span>${item}</span>
+          <span>${price}</span>
+          <button class="remove-btn" onclick="removeItem(${index})">×</button>
+        `;
+        priceItems.appendChild(li);
+      });
+      localStorage.setItem("solarax_items", JSON.stringify(items));
+    }
+
+    function addItem() {
+      const item = itemInput.value.trim();
+      const price = priceInput.value.trim();
+      if (item && price) {
+        items.push({ item, price });
+        updateList();
+        itemInput.value = "";
+        priceInput.value = "";
+      }
+    }
+
+    function removeItem(index) {
+      items.splice(index, 1);
+      updateList();
+    }
+
+    function removeLast() {
+      items.pop();
+      updateList();
+    }
+
+    function clearAll() {
+      items = [];
+      updateList();
+    }
+
+    function downloadImage() {
+      html2canvas(document.getElementById("poster")).then(canvas => {
+        const link = document.createElement("a");
+        link.download = `Solarax_Price_List_${dateInput.value}.png`;
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+
+    window.onload = updateList;
+  </script></body>
 </html>
