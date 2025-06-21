@@ -1,3 +1,5 @@
+/* style.css */
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -69,10 +71,11 @@ button:hover {
 
 .poster-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
   text-align: center;
+  gap: 10px;
 }
 
 #logo {
@@ -104,6 +107,15 @@ button:hover {
   gap: 10px;
 }
 
+.date-box input {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1em;
+}
+
 .price-list-heading {
   margin-top: 20px;
   background: #1db954;
@@ -113,6 +125,7 @@ button:hover {
   font-weight: bold;
   text-align: center;
   color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 #priceItems {
@@ -127,12 +140,13 @@ button:hover {
   padding: 16px 22px;
   border-radius: 8px;
   display: grid;
-  grid-template-columns: 2fr 1fr auto;
-  gap: 15px;
+  grid-template-columns: 2fr 1fr auto auto auto;
+  gap: 10px;
   align-items: center;
   font-size: 1.7em;
   font-weight: bold;
   color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #priceItems li span:nth-child(2) {
@@ -144,9 +158,12 @@ button:hover {
   font-weight: 900;
   font-size: 1.2em;
   min-width: 120px;
+  display: inline-block;
 }
 
-.remove-btn {
+.remove-btn,
+.up-btn,
+.down-btn {
   background: #ff4c4c;
   color: white;
   border: none;
@@ -156,6 +173,14 @@ button:hover {
   font-weight: bold;
   cursor: pointer;
   font-size: 1em;
+}
+
+.up-btn {
+  background: #f1c40f;
+}
+
+.down-btn {
+  background: #3498db;
 }
 
 .poster-footer {
@@ -179,7 +204,9 @@ button:hover {
 .contact {
   color: #a6f0c6;
   font-weight: bold;
+  font-size: 1em;
   white-space: pre-line;
+  line-height: 1.6em;
 }
 
 .actions {
